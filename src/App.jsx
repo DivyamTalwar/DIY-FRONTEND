@@ -19,7 +19,7 @@ import EpicLeaderboard from './pages/EpicLeaderboard';
 import './App.css';
 
 // Lazy load new advanced features for better performance
-const AdvancedAnalytics = lazy(() => import('./pages/AdvancedAnalytics'));
+const PremiumAnalytics = lazy(() => import('./pages/PremiumAnalytics'));
 const TenantPortal = lazy(() => import('./pages/TenantPortal'));
 const FinancialManagement = lazy(() => import('./pages/FinancialManagement'));
 const UltraModernDashboard = lazy(() => import('./pages/UltraModernDashboard'));
@@ -65,7 +65,7 @@ function App() {
             <Route path="/schedule-technician" element={<TechnicianSchedule />} />
             <Route path="/achievements" element={<ModernAchievements />} />
             <Route path="/leaderboard" element={<EpicLeaderboard />} />
-            <Route path="/analytics" element={<AdvancedAnalytics />} />
+            <Route path="/analytics" element={<PremiumAnalytics />} />
             <Route path="/tenant-portal" element={<TenantPortal />} />
             <Route path="/financial" element={<FinancialManagement />} />
           </Routes>
