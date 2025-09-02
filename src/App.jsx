@@ -22,6 +22,7 @@ import './App.css';
 const AdvancedAnalytics = lazy(() => import('./pages/AdvancedAnalytics'));
 const TenantPortal = lazy(() => import('./pages/TenantPortal'));
 const FinancialManagement = lazy(() => import('./pages/FinancialManagement'));
+const UltraModernDashboard = lazy(() => import('./pages/UltraModernDashboard'));
 
 // Loading component
 const LoadingSpinner = () => (
@@ -51,7 +52,8 @@ function App() {
           <NotificationSystem />
           <ChatSupport />
           <Routes>
-            <Route path="/" element={<EmergencyLanding />} />
+            <Route path="/" element={<UltraModernDashboard />} />
+            <Route path="/emergency" element={<EmergencyLanding />} />
             <Route path="/smart-diagnosis" element={<SmartDiagnosis />} />
             <Route path="/guided-repair/:id" element={<GuidedRepair />} />
             <Route path="/quick-fix" element={<QuickFix />} />
