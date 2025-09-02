@@ -106,19 +106,21 @@ function Home() {
   ];
 
   return (
-    <div style={{ minHeight: '100vh', background: 'var(--bg-light)' }}>
+    <div style={{ minHeight: '100vh', background: 'var(--bg-light)', width: '100%' }}>
       {/* Simplified Navigation */}
-      <nav className="nav-simple">
-        <div className="nav-logo">FixIt</div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
-          <span className="trust-badge">
-            <CheckCircle size={16} />
-            Trusted by 50,000+ homes
-          </span>
-          <span className="time-badge">
-            <Clock size={16} />
-            Avg fix: 15 mins
-          </span>
+      <nav className="nav-simple" style={{ width: '100%' }}>
+        <div style={{ maxWidth: '1400px', margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0 32px' }}>
+          <div className="nav-logo">FixIt</div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
+            <span className="trust-badge">
+              <CheckCircle size={16} />
+              Trusted by 50,000+ homes
+            </span>
+            <span className="time-badge">
+              <Clock size={16} />
+              Avg fix: 15 mins
+            </span>
+          </div>
         </div>
       </nav>
 

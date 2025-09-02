@@ -38,6 +38,7 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  align-items: stretch;
 }
 
 .app-container {
@@ -45,6 +46,23 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  align-items: stretch;
+}
+
+/* Ensure all content is centered */
+main {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Container for proper width constraints */
+.container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
 }
 
 a {

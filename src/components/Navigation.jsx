@@ -19,18 +19,52 @@ function Navigation() {
   }
 
   return (
-    <nav className="nav-bar">
-      <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-        <h1 className="hero-title" style={{ fontSize: '32px', margin: 0 }}>DIY HEROES</h1>
-        <div className="hero-avatar" style={{ width: '48px', height: '48px', fontSize: '20px' }}>
-          🦸
+    <nav className="nav-bar" style={{ 
+      width: '100%', 
+      padding: '16px 24px', 
+      background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+      boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+      position: 'sticky',
+      top: 0,
+      zIndex: 1000
+    }}>
+      <div style={{ 
+        maxWidth: '1400px', 
+        margin: '0 auto', 
+        display: 'flex', 
+        justifyContent: 'space-between', 
+        alignItems: 'center',
+        width: '100%'
+      }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+          <h1 className="hero-title" style={{ fontSize: '28px', margin: 0, color: 'white' }}>DIY HEROES</h1>
+          <div className="hero-avatar" style={{ width: '40px', height: '40px', fontSize: '18px', background: 'white', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            🦸
+          </div>
         </div>
-      </div>
       
-      <ul className="nav-links">
+        <ul className="nav-links" style={{ 
+          display: 'flex', 
+          listStyle: 'none', 
+          gap: '8px', 
+          margin: 0, 
+          padding: 0,
+          flexWrap: 'wrap',
+          justifyContent: 'center'
+        }}>
         <li>
-          <Link to="/" className={`nav-link ${isActive('/')}`}>
-            <Home size={20} style={{ display: 'inline', marginRight: '4px' }} />
+          <Link to="/" className={`nav-link ${isActive('/')}`} style={{
+            padding: '8px 16px',
+            borderRadius: '8px',
+            color: isActive('/') ? '#667eea' : 'white',
+            background: isActive('/') ? 'white' : 'transparent',
+            textDecoration: 'none',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '4px',
+            transition: 'all 0.2s'
+          }}>
+            <Home size={18} />
             Dashboard
           </Link>
         </li>
@@ -82,15 +116,23 @@ function Navigation() {
             Financial
           </Link>
         </li>
-      </ul>
-      
-      <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-        <div className="streak-badge">
-          🔥 {userProgress.streak} days
-        </div>
-        <div style={{ textAlign: 'right' }}>
-          <div style={{ fontSize: '12px', color: '#6B7280' }}>Level {userProgress.level}</div>
-          <div style={{ fontWeight: '600' }}>{userProgress.xp} XP</div>
+        </ul>
+        
+        <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+          <div className="streak-badge" style={{
+            background: 'white',
+            color: '#667eea',
+            padding: '6px 12px',
+            borderRadius: '20px',
+            fontSize: '14px',
+            fontWeight: 'bold'
+          }}>
+            🔥 {userProgress.streak} days
+          </div>
+          <div style={{ textAlign: 'right', color: 'white' }}>
+            <div style={{ fontSize: '12px', opacity: 0.9 }}>Level {userProgress.level}</div>
+            <div style={{ fontWeight: '600' }}>{userProgress.xp} XP</div>
+          </div>
         </div>
       </div>
     </nav>

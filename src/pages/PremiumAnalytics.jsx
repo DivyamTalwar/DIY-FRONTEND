@@ -387,7 +387,7 @@ function PremiumAnalytics() {
         </div>
       </motion.header>
 
-      <div className="relative z-10 max-w-[1600px] mx-auto px-6 py-8">
+      <div className="relative z-10 w-full" style={{ maxWidth: '1400px', margin: '0 auto', padding: '32px 24px' }}>
         {/* Premium KPI Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4 mb-8">
           {premiumCards.map((card, index) => (

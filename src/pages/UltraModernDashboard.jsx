@@ -230,7 +230,7 @@ function UltraModernDashboard() {
         </div>
       </motion.header>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="w-full" style={{ maxWidth: '1400px', margin: '0 auto', padding: '32px 24px' }}>
         {/* Welcome Section */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
