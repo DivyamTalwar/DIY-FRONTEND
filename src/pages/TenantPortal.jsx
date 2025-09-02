@@ -178,26 +178,68 @@ function TenantPortal() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div style={{
+      width: '100%',
+      minHeight: '100vh',
+      background: '#f8f9fa'
+    }}>
       {/* Header */}
       <motion.header
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="bg-white shadow-sm border-b"
+        style={{
+          background: 'white',
+          borderBottom: '1px solid #e9ecef',
+          boxShadow: '0 1px 3px rgba(0, 0, 0, 0.05)',
+          position: 'sticky',
+          top: 0,
+          zIndex: 1000,
+          width: '100%'
+        }}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex items-center gap-4">
-              <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+        <div style={{
+          maxWidth: '1400px',
+          margin: '0 auto',
+          padding: '0 24px'
+        }}>
+          <div style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            height: '64px'
+          }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+              <h1 style={{
+                fontSize: '24px',
+                fontWeight: 'bold',
+                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                margin: 0
+              }}>
                 Tenant Portal
               </h1>
-              <span className="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm font-medium">
+              <span style={{
+                padding: '4px 12px',
+                background: '#d1f4e0',
+                color: '#065f46',
+                borderRadius: '20px',
+                fontSize: '14px',
+                fontWeight: '500'
+              }}>
                 Unit {currentTenant?.unit}
               </span>
             </div>
             
-            <div className="flex items-center gap-4">
-              <button className="relative p-2 text-gray-600 hover:text-gray-900">
+            <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+              <button style={{
+                position: 'relative',
+                padding: '8px',
+                background: 'transparent',
+                border: 'none',
+                cursor: 'pointer',
+                color: '#6c757d'
+              }}>
                 <Bell size={20} />
                 <span className="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full animate-pulse" />
               </button>
