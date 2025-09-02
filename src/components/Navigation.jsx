@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
-import { Home, Plus, Trophy, Users, Shield, Calendar } from 'lucide-react';
+import { Home, Plus, Trophy, Users, Shield, Calendar, BarChart3, UserCircle, DollarSign } from 'lucide-react';
 import { userProgress } from '../data/demoData';
 
 function Navigation() {
@@ -62,6 +62,24 @@ function Navigation() {
           <Link to="/schedule-technician" className={`nav-link ${isActive('/schedule-technician')}`}>
             <Calendar size={20} style={{ display: 'inline', marginRight: '4px' }} />
             Technician
+          </Link>
+        </li>
+        <li>
+          <Link to="/analytics" className={`nav-link ${isActive('/analytics')}`}>
+            <BarChart3 size={20} style={{ display: 'inline', marginRight: '4px' }} />
+            Analytics
+          </Link>
+        </li>
+        <li>
+          <Link to="/tenant-portal" className={`nav-link ${isActive('/tenant-portal')}`}>
+            <UserCircle size={20} style={{ display: 'inline', marginRight: '4px' }} />
+            Tenant
+          </Link>
+        </li>
+        <li>
+          <Link to="/financial" className={`nav-link ${isActive('/financial')}`}>
+            <DollarSign size={20} style={{ display: 'inline', marginRight: '4px' }} />
+            Financial
           </Link>
         </li>
       </ul>

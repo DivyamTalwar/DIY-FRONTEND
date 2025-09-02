@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import Navigation from './components/Navigation';
@@ -17,6 +17,11 @@ import TechnicianSchedule from './pages/TechnicianSchedule';
 import ModernAchievements from './pages/ModernAchievements';
 import EpicLeaderboard from './pages/EpicLeaderboard';
 import './App.css';
+
+// Lazy load new advanced features for better performance
+const AdvancedAnalytics = lazy(() => import('./pages/AdvancedAnalytics'));
+const TenantPortal = lazy(() => import('./pages/TenantPortal'));
+const FinancialManagement = lazy(() => import('./pages/FinancialManagement'));
 
 // Loading component
 const LoadingSpinner = () => (
@@ -58,6 +63,9 @@ function App() {
             <Route path="/schedule-technician" element={<TechnicianSchedule />} />
             <Route path="/achievements" element={<ModernAchievements />} />
             <Route path="/leaderboard" element={<EpicLeaderboard />} />
+            <Route path="/analytics" element={<AdvancedAnalytics />} />
+            <Route path="/tenant-portal" element={<TenantPortal />} />
+            <Route path="/financial" element={<FinancialManagement />} />
           </Routes>
           <Toaster 
             position="bottom-center"
