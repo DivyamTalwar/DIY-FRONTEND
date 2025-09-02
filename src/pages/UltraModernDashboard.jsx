@@ -9,7 +9,7 @@ import {
   Video, Settings, LogOut, Menu, X, Search, Filter, Download,
   Star, Heart, ThumbsUp, Eye, Share2, Info, HelpCircle, Map,
   Package, Truck, CreditCard, PieChart, Database, Cloud, Lock,
-  Smartphone, Monitor, Wifi, Battery, Mic, Camera, Paperclip
+  Smartphone, Monitor, Wifi, Battery, Mic, Camera, Paperclip, Plus
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import toast from 'react-hot-toast';
@@ -29,6 +29,7 @@ function UltraModernDashboard() {
   const [showCommandCenter, setShowCommandCenter] = useState(false);
   const [properties, setProperties] = useState([]);
   const [activeTab, setActiveTab] = useState('overview');
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   useEffect(() => {
     loadDashboardData();
@@ -123,172 +124,351 @@ function UltraModernDashboard() {
   ];
 
   const quickActions = [
-    { icon: Wrench, label: 'New Repair', color: 'purple', path: '/new-repair' },
-    { icon: Users, label: 'Add Tenant', color: 'blue', path: '/tenant-portal' },
-    { icon: DollarSign, label: 'Process Payment', color: 'green', path: '/financial' },
-    { icon: BarChart3, label: 'View Analytics', color: 'orange', path: '/analytics' },
-    { icon: Calendar, label: 'Schedule', color: 'pink', path: '/schedule-technician' },
-    { icon: Shield, label: 'Security', color: 'red', path: '/property-manager' }
+    { icon: Plus, label: 'New Repair', color: 'bg-purple-500', path: '/new-repair' },
+    { icon: Users, label: 'Add Tenant', color: 'bg-blue-500', path: '/tenant-portal' },
+    { icon: DollarSign, label: 'Payments', color: 'bg-green-500', path: '/financial' },
+    { icon: BarChart3, label: 'Analytics', color: 'bg-orange-500', path: '/analytics' },
+    { icon: Calendar, label: 'Schedule', color: 'bg-pink-500', path: '/schedule-technician' },
+    { icon: Shield, label: 'Security', color: 'bg-red-500', path: '/property-manager' }
+  ];
+
+  const activityFeed = [
+    { type: 'success', title: 'Maintenance Completed', desc: 'Unit 12B - Water heater replaced', time: 'Just now', icon: CheckCircle },
+    { type: 'warning', title: 'Urgent Request', desc: 'Unit 8A - AC not working', time: '2 min ago', icon: AlertTriangle },
+    { type: 'info', title: 'New Tenant', desc: 'Sarah Johnson moved into Unit 15C', time: '5 min ago', icon: Users },
+    { type: 'success', title: 'Payment Received', desc: '$2,500 from Unit 10D', time: '8 min ago', icon: DollarSign },
+    { type: 'info', title: 'Inspection Scheduled', desc: 'Building C - March 15, 2024', time: '12 min ago', icon: Calendar },
+    { type: 'success', title: 'Issue Resolved', desc: 'Parking complaint at Building A', time: '15 min ago', icon: CheckCircle }
   ];
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 flex items-center justify-center">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.5 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5 }}
-          className="text-center"
-        >
-          <motion.div
-            animate={{ rotate: 360 }}
-            transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-            className="w-24 h-24 mx-auto mb-8"
-          >
-            <div className="w-full h-full rounded-full border-4 border-purple-500 border-t-transparent animate-spin" />
-          </motion.div>
-          <h2 className="text-3xl font-bold text-white mb-2">Loading Your Empire</h2>
-          <p className="text-purple-300">Preparing something amazing...</p>
-        </motion.div>
+      <div style={{
+        minHeight: '100vh',
+        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
+      }}>
+        <div style={{ textAlign: 'center' }}>
+          <div style={{
+            width: '80px',
+            height: '80px',
+            margin: '0 auto 24px',
+            border: '4px solid rgba(255, 255, 255, 0.3)',
+            borderTopColor: 'white',
+            borderRadius: '50%',
+            animation: 'spin 1s linear infinite'
+          }} />
+          <h2 style={{ fontSize: '32px', fontWeight: 'bold', color: 'white', marginBottom: '8px' }}>
+            Loading Dashboard
+          </h2>
+          <p style={{ color: 'rgba(255, 255, 255, 0.8)' }}>Preparing your workspace...</p>
+        </div>
+        <style>{`
+          @keyframes spin {
+            to { transform: rotate(360deg); }
+          }
+        `}</style>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
-      {/* Animated Background */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob" />
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-pink-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-2000" />
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-blue-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-4000" />
-      </div>
-
-      {/* Premium Header */}
-      <motion.header
-        initial={{ y: -100, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        className="relative bg-black/20 backdrop-blur-xl border-b border-white/10"
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-20">
-            <div className="flex items-center gap-4">
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="flex items-center gap-3 cursor-pointer"
-                onClick={() => navigate('/')}
-              >
-                <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl flex items-center justify-center">
-                  <Home className="text-white" size={24} />
-                </div>
-                <div>
-                  <h1 className="text-2xl font-bold text-white">DIY Heroes</h1>
-                  <p className="text-xs text-purple-300">Property Management Platform</p>
-                </div>
-              </motion.div>
+    <div style={{ 
+      minHeight: '100vh',
+      background: '#f8f9fa',
+      width: '100%'
+    }}>
+      {/* Modern Header */}
+      <header style={{
+        background: 'white',
+        borderBottom: '1px solid #e9ecef',
+        boxShadow: '0 1px 3px rgba(0, 0, 0, 0.05)',
+        position: 'sticky',
+        top: 0,
+        zIndex: 1000
+      }}>
+        <div style={{
+          maxWidth: '1400px',
+          margin: '0 auto',
+          padding: '0 24px',
+          height: '72px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between'
+        }}>
+          {/* Logo Section */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
+            <button
+              onClick={() => setSidebarOpen(!sidebarOpen)}
+              style={{
+                padding: '8px',
+                background: 'transparent',
+                border: 'none',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}
+            >
+              <Menu size={24} style={{ color: '#495057' }} />
+            </button>
+            
+            <div 
+              style={{ display: 'flex', alignItems: 'center', gap: '12px', cursor: 'pointer' }}
+              onClick={() => navigate('/')}
+            >
+              <div style={{
+                width: '40px',
+                height: '40px',
+                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                borderRadius: '12px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}>
+                <Home size={24} style={{ color: 'white' }} />
+              </div>
+              <div>
+                <h1 style={{ fontSize: '20px', fontWeight: 'bold', color: '#212529', margin: 0 }}>
+                  DIY Heroes
+                </h1>
+                <p style={{ fontSize: '12px', color: '#6c757d', margin: 0 }}>
+                  Property Management System
+                </p>
+              </div>
             </div>
+          </div>
 
-            <div className="flex items-center gap-6">
-              {/* Search Bar */}
-              <motion.div
-                initial={{ width: 200 }}
-                whileHover={{ width: 300 }}
-                className="relative"
-              >
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
-                <input
-                  type="text"
-                  placeholder="Search anything..."
-                  className="w-full pl-10 pr-4 py-2 bg-white/10 backdrop-blur rounded-full text-white placeholder-gray-400 border border-white/20 focus:outline-none focus:border-purple-500"
-                />
-              </motion.div>
+          {/* Center Search */}
+          <div style={{
+            flex: 1,
+            maxWidth: '500px',
+            margin: '0 32px'
+          }}>
+            <div style={{
+              position: 'relative',
+              width: '100%'
+            }}>
+              <Search size={20} style={{
+                position: 'absolute',
+                left: '16px',
+                top: '50%',
+                transform: 'translateY(-50%)',
+                color: '#6c757d'
+              }} />
+              <input
+                type="text"
+                placeholder="Search properties, tenants, or tasks..."
+                style={{
+                  width: '100%',
+                  padding: '12px 16px 12px 48px',
+                  background: '#f8f9fa',
+                  border: '1px solid #dee2e6',
+                  borderRadius: '12px',
+                  fontSize: '14px',
+                  outline: 'none',
+                  transition: 'all 0.2s'
+                }}
+                onFocus={(e) => {
+                  e.target.style.borderColor = '#667eea';
+                  e.target.style.boxShadow = '0 0 0 3px rgba(102, 126, 234, 0.1)';
+                }}
+                onBlur={(e) => {
+                  e.target.style.borderColor = '#dee2e6';
+                  e.target.style.boxShadow = 'none';
+                }}
+              />
+            </div>
+          </div>
 
-              {/* Notifications */}
-              <motion.button
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-                className="relative p-3 bg-white/10 backdrop-blur rounded-full text-white hover:bg-white/20 transition-all"
-              >
-                <Bell size={20} />
-                <span className="absolute top-0 right-0 w-3 h-3 bg-red-500 rounded-full animate-pulse" />
-              </motion.button>
+          {/* Right Actions */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+            {/* Notifications */}
+            <button style={{
+              position: 'relative',
+              padding: '8px',
+              background: '#f8f9fa',
+              border: '1px solid #dee2e6',
+              borderRadius: '10px',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}>
+              <Bell size={20} style={{ color: '#495057' }} />
+              <span style={{
+                position: 'absolute',
+                top: '-4px',
+                right: '-4px',
+                width: '12px',
+                height: '12px',
+                background: '#dc3545',
+                borderRadius: '50%',
+                border: '2px solid white'
+              }} />
+            </button>
 
-              {/* User Profile */}
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                className="flex items-center gap-3 px-4 py-2 bg-white/10 backdrop-blur rounded-full cursor-pointer"
-              >
-                <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full" />
-                <div className="text-left">
-                  <p className="text-sm font-semibold text-white">John Smith</p>
-                  <p className="text-xs text-purple-300">Super Admin</p>
-                </div>
-                <ChevronRight className="text-white/50" size={16} />
-              </motion.div>
+            {/* User Profile */}
+            <div style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '12px',
+              padding: '8px 16px',
+              background: '#f8f9fa',
+              borderRadius: '12px',
+              cursor: 'pointer'
+            }}>
+              <div style={{
+                width: '36px',
+                height: '36px',
+                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                borderRadius: '10px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: 'white',
+                fontWeight: 'bold'
+              }}>
+                JD
+              </div>
+              <div>
+                <p style={{ margin: 0, fontSize: '14px', fontWeight: '600', color: '#212529' }}>
+                  John Doe
+                </p>
+                <p style={{ margin: 0, fontSize: '12px', color: '#6c757d' }}>
+                  Administrator
+                </p>
+              </div>
+              <ChevronRight size={16} style={{ color: '#6c757d' }} />
             </div>
           </div>
         </div>
-      </motion.header>
+      </header>
 
-      <div className="w-full" style={{ maxWidth: '1400px', margin: '0 auto', padding: '32px 24px' }}>
+      {/* Main Content */}
+      <div style={{
+        maxWidth: '1400px',
+        margin: '0 auto',
+        padding: '32px 24px'
+      }}>
         {/* Welcome Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="mb-8"
-        >
-          <h2 className="text-4xl font-bold text-white mb-2">
+        <div style={{ marginBottom: '32px' }}>
+          <h1 style={{ 
+            fontSize: '32px', 
+            fontWeight: 'bold', 
+            color: '#212529',
+            marginBottom: '8px'
+          }}>
             Welcome back, John! 👋
-          </h2>
-          <p className="text-purple-300">
-            Here's what's happening with your properties today
+          </h1>
+          <p style={{ fontSize: '16px', color: '#6c757d' }}>
+            Here's your property empire overview for today
           </p>
-        </motion.div>
+        </div>
 
-        {/* Hero Metrics Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        {/* Metrics Grid */}
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+          gap: '24px',
+          marginBottom: '32px'
+        }}>
           {heroMetrics.map((metric, index) => (
             <motion.div
               key={metric.title}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
-              whileHover={{ scale: 1.02, y: -5 }}
-              className="relative overflow-hidden bg-white/10 backdrop-blur-xl rounded-2xl border border-white/20 p-6"
+              whileHover={{ y: -5, boxShadow: '0 10px 30px rgba(0, 0, 0, 0.1)' }}
+              style={{
+                background: 'white',
+                borderRadius: '16px',
+                padding: '24px',
+                border: '1px solid #e9ecef',
+                position: 'relative',
+                overflow: 'hidden',
+                cursor: 'pointer',
+                transition: 'all 0.3s'
+              }}
             >
-              {/* Background Gradient */}
-              <div className={`absolute inset-0 bg-gradient-to-br ${metric.bgGradient} opacity-10`} />
-              
-              <div className="relative z-10">
-                <div className="flex justify-between items-start mb-4">
-                  <div className={`p-3 bg-gradient-to-br ${metric.bgGradient} rounded-xl`}>
-                    <metric.icon className="text-white" size={24} />
+              {/* Background Pattern */}
+              <div style={{
+                position: 'absolute',
+                top: 0,
+                right: 0,
+                width: '100px',
+                height: '100px',
+                background: `linear-gradient(135deg, ${metric.bgGradient.replace('from-', '').replace('to-', ',').replace('-500', '').replace('-600', '')})`,
+                opacity: 0.1,
+                borderRadius: '50%',
+                transform: 'translate(30%, -30%)'
+              }} />
+
+              <div style={{ position: 'relative' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '16px' }}>
+                  <div style={{
+                    width: '48px',
+                    height: '48px',
+                    background: `linear-gradient(135deg, ${metric.bgGradient.replace('from-', '').replace('to-', ',').replace('-500', '').replace('-600', '')})`,
+                    borderRadius: '12px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center'
+                  }}>
+                    <metric.icon size={24} style={{ color: 'white' }} />
                   </div>
-                  <div className={`flex items-center gap-1 text-sm ${
-                    metric.trend === 'up' ? 'text-green-400' : 'text-red-400'
-                  }`}>
-                    {metric.trend === 'up' ? <ArrowUpRight size={16} /> : <ArrowDownRight size={16} />}
-                    {metric.change}
+                  
+                  <div style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '4px',
+                    padding: '4px 8px',
+                    background: metric.trend === 'up' ? '#d1f4e0' : '#ffd4d4',
+                    borderRadius: '8px'
+                  }}>
+                    {metric.trend === 'up' ? 
+                      <ArrowUpRight size={16} style={{ color: '#28a745' }} /> : 
+                      <ArrowDownRight size={16} style={{ color: '#dc3545' }} />
+                    }
+                    <span style={{
+                      fontSize: '12px',
+                      fontWeight: '600',
+                      color: metric.trend === 'up' ? '#28a745' : '#dc3545'
+                    }}>
+                      {metric.change}
+                    </span>
                   </div>
                 </div>
 
-                <h3 className="text-3xl font-bold text-white mb-1">{metric.value}</h3>
-                <p className="text-sm text-gray-400 mb-1">{metric.title}</p>
-                <p className="text-xs text-purple-300">{metric.description}</p>
+                <div>
+                  <h2 style={{ fontSize: '32px', fontWeight: 'bold', color: '#212529', margin: '0 0 4px 0' }}>
+                    {metric.value}
+                  </h2>
+                  <p style={{ fontSize: '14px', color: '#6c757d', margin: '0 0 4px 0' }}>
+                    {metric.title}
+                  </p>
+                  <p style={{ fontSize: '12px', color: '#adb5bd', margin: 0 }}>
+                    {metric.description}
+                  </p>
+                </div>
 
                 {/* Mini Chart */}
-                <div className="mt-4 h-12">
-                  <svg className="w-full h-full">
+                <div style={{ marginTop: '16px', height: '40px' }}>
+                  <svg style={{ width: '100%', height: '100%' }}>
                     <polyline
-                      points={metric.sparkData.map((v, i) => `${i * 20},${48 - v * 0.4}`).join(' ')}
+                      points={metric.sparkData.map((v, i) => 
+                        `${(i / (metric.sparkData.length - 1)) * 100}%,${40 - (v / Math.max(...metric.sparkData)) * 35}`
+                      ).join(' ')}
                       fill="none"
-                      stroke="url(#gradient)"
+                      stroke="url(#gradient-${index})"
                       strokeWidth="2"
                     />
                     <defs>
-                      <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                        <stop offset="0%" stopColor="#8b5cf6" />
-                        <stop offset="100%" stopColor="#ec4899" />
+                      <linearGradient id={`gradient-${index}`} x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stopColor="#667eea" />
+                        <stop offset="100%" stopColor="#764ba2" />
                       </linearGradient>
                     </defs>
                   </svg>
@@ -299,160 +479,298 @@ function UltraModernDashboard() {
         </div>
 
         {/* Quick Actions */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="mb-8"
-        >
-          <h3 className="text-xl font-semibold text-white mb-4">Quick Actions</h3>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+        <div style={{ marginBottom: '32px' }}>
+          <h3 style={{ fontSize: '20px', fontWeight: '600', color: '#212529', marginBottom: '16px' }}>
+            Quick Actions
+          </h3>
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(150px, 1fr))',
+            gap: '16px'
+          }}>
             {quickActions.map((action, index) => (
               <motion.button
                 key={action.label}
-                initial={{ opacity: 0, scale: 0.8 }}
+                initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: index * 0.05 }}
-                whileHover={{ scale: 1.05, y: -5 }}
+                whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => navigate(action.path)}
-                className="relative overflow-hidden bg-white/10 backdrop-blur-xl rounded-xl border border-white/20 p-6 text-center hover:bg-white/20 transition-all"
+                style={{
+                  background: 'white',
+                  border: '1px solid #e9ecef',
+                  borderRadius: '12px',
+                  padding: '20px',
+                  cursor: 'pointer',
+                  transition: 'all 0.2s',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  gap: '12px'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.1)';
+                  e.currentTarget.style.borderColor = '#667eea';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.boxShadow = 'none';
+                  e.currentTarget.style.borderColor = '#e9ecef';
+                }}
               >
-                <div className={`w-12 h-12 mx-auto mb-3 bg-gradient-to-br from-${action.color}-500 to-${action.color}-600 rounded-xl flex items-center justify-center`}>
-                  <action.icon className="text-white" size={24} />
+                <div className={action.color} style={{
+                  width: '48px',
+                  height: '48px',
+                  borderRadius: '12px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}>
+                  <action.icon size={24} style={{ color: 'white' }} />
                 </div>
-                <p className="text-sm font-medium text-white">{action.label}</p>
+                <span style={{ fontSize: '14px', fontWeight: '500', color: '#495057' }}>
+                  {action.label}
+                </span>
               </motion.button>
             ))}
           </div>
-        </motion.div>
+        </div>
 
         {/* Main Content Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {/* Live Activity Feed */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            className="lg:col-span-2 bg-white/10 backdrop-blur-xl rounded-2xl border border-white/20 p-6"
-          >
-            <div className="flex justify-between items-center mb-6">
-              <h3 className="text-xl font-semibold text-white flex items-center gap-2">
-                <Activity className="text-purple-400" size={24} />
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: '1fr 380px',
+          gap: '24px'
+        }}>
+          {/* Activity Feed */}
+          <div style={{
+            background: 'white',
+            borderRadius: '16px',
+            padding: '24px',
+            border: '1px solid #e9ecef'
+          }}>
+            <div style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              marginBottom: '24px'
+            }}>
+              <h3 style={{ fontSize: '20px', fontWeight: '600', color: '#212529', margin: 0 }}>
                 Live Activity Feed
               </h3>
-              <div className="flex items-center gap-2">
-                <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-                <span className="text-sm text-green-400">Live</span>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <span style={{
+                  width: '8px',
+                  height: '8px',
+                  background: '#28a745',
+                  borderRadius: '50%',
+                  display: 'inline-block'
+                }} />
+                <span style={{ fontSize: '14px', color: '#28a745' }}>Live</span>
               </div>
             </div>
 
-            <div className="space-y-4 max-h-96 overflow-y-auto">
-              {[
-                { type: 'success', title: 'Maintenance Completed', desc: 'Unit 12B - Water heater replaced', time: 'Just now', icon: CheckCircle },
-                { type: 'warning', title: 'Urgent Request', desc: 'Unit 8A - AC not working', time: '2 min ago', icon: AlertTriangle },
-                { type: 'info', title: 'New Tenant', desc: 'Sarah Johnson moved into Unit 15C', time: '5 min ago', icon: Users },
-                { type: 'success', title: 'Payment Received', desc: '$2,500 from Unit 10D', time: '8 min ago', icon: DollarSign },
-                { type: 'info', title: 'Inspection Scheduled', desc: 'Building C - March 15, 2024', time: '12 min ago', icon: Calendar },
-                { type: 'success', title: 'Issue Resolved', desc: 'Parking complaint at Building A', time: '15 min ago', icon: CheckCircle }
-              ].map((activity, index) => (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+              {activityFeed.map((activity, index) => (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.1 }}
-                  className="flex items-start gap-4 p-4 bg-white/5 rounded-xl hover:bg-white/10 transition-all cursor-pointer"
+                  style={{
+                    display: 'flex',
+                    gap: '16px',
+                    padding: '16px',
+                    background: '#f8f9fa',
+                    borderRadius: '12px',
+                    cursor: 'pointer',
+                    transition: 'all 0.2s'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = '#e9ecef';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = '#f8f9fa';
+                  }}
                 >
-                  <div className={`p-2 rounded-lg ${
-                    activity.type === 'success' ? 'bg-green-500/20 text-green-400' :
-                    activity.type === 'warning' ? 'bg-yellow-500/20 text-yellow-400' :
-                    'bg-blue-500/20 text-blue-400'
-                  }`}>
-                    <activity.icon size={20} />
+                  <div style={{
+                    width: '40px',
+                    height: '40px',
+                    borderRadius: '10px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    background: activity.type === 'success' ? '#d1f4e0' :
+                               activity.type === 'warning' ? '#fff3cd' : '#d1ecf1'
+                  }}>
+                    <activity.icon size={20} style={{
+                      color: activity.type === 'success' ? '#28a745' :
+                             activity.type === 'warning' ? '#ffc107' : '#17a2b8'
+                    }} />
                   </div>
-                  <div className="flex-1">
-                    <h4 className="text-white font-medium">{activity.title}</h4>
-                    <p className="text-gray-400 text-sm">{activity.desc}</p>
+                  <div style={{ flex: 1 }}>
+                    <h4 style={{ fontSize: '14px', fontWeight: '600', color: '#212529', margin: '0 0 4px 0' }}>
+                      {activity.title}
+                    </h4>
+                    <p style={{ fontSize: '13px', color: '#6c757d', margin: 0 }}>
+                      {activity.desc}
+                    </p>
                   </div>
-                  <span className="text-xs text-gray-500">{activity.time}</span>
+                  <span style={{ fontSize: '12px', color: '#adb5bd' }}>
+                    {activity.time}
+                  </span>
                 </motion.div>
               ))}
             </div>
-          </motion.div>
 
-          {/* AI Assistant */}
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            className="bg-gradient-to-br from-purple-600/20 to-pink-600/20 backdrop-blur-xl rounded-2xl border border-white/20 p-6"
-          >
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl flex items-center justify-center">
-                <Cpu className="text-white" size={24} />
-              </div>
-              <div>
-                <h3 className="text-xl font-semibold text-white">AI Assistant</h3>
-                <p className="text-xs text-purple-300">Powered by Advanced AI</p>
-              </div>
-            </div>
-
-            <div className="space-y-4">
-              <div className="p-4 bg-white/10 rounded-xl">
-                <h4 className="text-white font-medium mb-2 flex items-center gap-2">
-                  <Zap className="text-yellow-400" size={16} />
-                  Predictive Insights
-                </h4>
-                <p className="text-sm text-gray-300">
-                  3 units likely to request maintenance in the next 7 days based on historical patterns.
-                </p>
-                <button className="mt-2 text-xs text-purple-400 hover:text-purple-300">View Details →</button>
-              </div>
-
-              <div className="p-4 bg-white/10 rounded-xl">
-                <h4 className="text-white font-medium mb-2 flex items-center gap-2">
-                  <Target className="text-green-400" size={16} />
-                  Optimization Opportunity
-                </h4>
-                <p className="text-sm text-gray-300">
-                  Reduce maintenance costs by 15% by implementing preventive maintenance schedule.
-                </p>
-                <button className="mt-2 text-xs text-purple-400 hover:text-purple-300">Learn More →</button>
-              </div>
-
-              <div className="p-4 bg-white/10 rounded-xl">
-                <h4 className="text-white font-medium mb-2 flex items-center gap-2">
-                  <TrendingUp className="text-blue-400" size={16} />
-                  Revenue Forecast
-                </h4>
-                <p className="text-sm text-gray-300">
-                  Expected 8% revenue increase next quarter based on current occupancy trends.
-                </p>
-                <button className="mt-2 text-xs text-purple-400 hover:text-purple-300">See Analysis →</button>
-              </div>
-            </div>
-
-            <motion.button
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              className="w-full mt-6 px-4 py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-xl font-medium hover:shadow-lg transition-all"
+            <button style={{
+              width: '100%',
+              marginTop: '16px',
+              padding: '12px',
+              background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+              color: 'white',
+              border: 'none',
+              borderRadius: '12px',
+              fontSize: '14px',
+              fontWeight: '600',
+              cursor: 'pointer',
+              transition: 'transform 0.2s'
+            }}
+            onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-2px)'}
+            onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}
             >
-              Ask AI Assistant
-            </motion.button>
-          </motion.div>
-        </div>
-
-        {/* Properties Overview */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="mt-8"
-        >
-          <div className="flex justify-between items-center mb-6">
-            <h3 className="text-2xl font-semibold text-white">Properties Overview</h3>
-            <button className="text-purple-400 hover:text-purple-300 flex items-center gap-2">
-              View All <ChevronRight size={20} />
+              View All Activities
             </button>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {/* AI Assistant */}
+          <div style={{
+            background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+            borderRadius: '16px',
+            padding: '24px',
+            color: 'white'
+          }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '24px' }}>
+              <div style={{
+                width: '48px',
+                height: '48px',
+                background: 'rgba(255, 255, 255, 0.2)',
+                borderRadius: '12px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}>
+                <Cpu size={24} />
+              </div>
+              <div>
+                <h3 style={{ fontSize: '18px', fontWeight: '600', margin: 0 }}>
+                  AI Assistant
+                </h3>
+                <p style={{ fontSize: '12px', margin: 0, opacity: 0.9 }}>
+                  Your intelligent property advisor
+                </p>
+              </div>
+            </div>
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+              {[
+                { icon: Zap, title: 'Smart Prediction', desc: '3 units need maintenance soon' },
+                { icon: Target, title: 'Cost Optimization', desc: 'Save 15% on maintenance' },
+                { icon: TrendingUp, title: 'Revenue Forecast', desc: '8% growth expected' }
+              ].map((item, index) => (
+                <div
+                  key={index}
+                  style={{
+                    padding: '16px',
+                    background: 'rgba(255, 255, 255, 0.1)',
+                    borderRadius: '12px',
+                    cursor: 'pointer',
+                    transition: 'all 0.2s'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = 'rgba(255, 255, 255, 0.2)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)';
+                  }}
+                >
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '8px' }}>
+                    <item.icon size={18} />
+                    <h4 style={{ fontSize: '14px', fontWeight: '600', margin: 0 }}>
+                      {item.title}
+                    </h4>
+                  </div>
+                  <p style={{ fontSize: '13px', margin: 0, opacity: 0.9 }}>
+                    {item.desc}
+                  </p>
+                </div>
+              ))}
+            </div>
+
+            <button style={{
+              width: '100%',
+              marginTop: '16px',
+              padding: '12px',
+              background: 'white',
+              color: '#667eea',
+              border: 'none',
+              borderRadius: '12px',
+              fontSize: '14px',
+              fontWeight: '600',
+              cursor: 'pointer',
+              transition: 'transform 0.2s'
+            }}
+            onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-2px)'}
+            onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}
+            >
+              Ask AI Assistant
+            </button>
+          </div>
+        </div>
+
+        {/* Properties Overview */}
+        <div style={{ marginTop: '32px' }}>
+          <div style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            marginBottom: '20px'
+          }}>
+            <h3 style={{ fontSize: '20px', fontWeight: '600', color: '#212529' }}>
+              Properties Overview
+            </h3>
+            <button style={{
+              padding: '8px 16px',
+              background: 'transparent',
+              color: '#667eea',
+              border: '1px solid #667eea',
+              borderRadius: '8px',
+              fontSize: '14px',
+              fontWeight: '500',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px',
+              transition: 'all 0.2s'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = '#667eea';
+              e.currentTarget.style.color = 'white';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = 'transparent';
+              e.currentTarget.style.color = '#667eea';
+            }}
+            >
+              View All Properties <ChevronRight size={16} />
+            </button>
+          </div>
+
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(350px, 1fr))',
+            gap: '24px'
+          }}>
             {properties.map((property, index) => (
               <motion.div
                 key={property.id}
@@ -460,119 +778,88 @@ function UltraModernDashboard() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
                 whileHover={{ y: -5 }}
-                className="bg-white/10 backdrop-blur-xl rounded-2xl border border-white/20 overflow-hidden cursor-pointer"
+                style={{
+                  background: 'white',
+                  borderRadius: '16px',
+                  overflow: 'hidden',
+                  border: '1px solid #e9ecef',
+                  cursor: 'pointer',
+                  transition: 'all 0.3s'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.1)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.boxShadow = 'none';
+                }}
               >
-                <div className="h-32 bg-gradient-to-br from-purple-500/20 to-pink-500/20" />
-                <div className="p-6">
-                  <h4 className="text-lg font-semibold text-white mb-2">{property.name}</h4>
-                  <div className="space-y-2">
-                    <div className="flex justify-between text-sm">
-                      <span className="text-gray-400">Units</span>
-                      <span className="text-white">{property.occupiedUnits}/{property.units}</span>
+                <div style={{
+                  height: '120px',
+                  background: `linear-gradient(135deg, ${
+                    ['#667eea, #764ba2', '#f093fb, #f5576c', '#4facfe, #00f2fe', '#43e97b, #38f9d7'][index % 4]
+                  })`,
+                  position: 'relative'
+                }}>
+                  <div style={{
+                    position: 'absolute',
+                    top: '16px',
+                    right: '16px',
+                    padding: '4px 12px',
+                    background: 'rgba(255, 255, 255, 0.9)',
+                    borderRadius: '20px',
+                    fontSize: '12px',
+                    fontWeight: '600',
+                    color: property.metrics.occupancyRate > 90 ? '#28a745' : '#ffc107'
+                  }}>
+                    {property.metrics.occupancyRate}% Occupied
+                  </div>
+                </div>
+                
+                <div style={{ padding: '20px' }}>
+                  <h4 style={{ fontSize: '18px', fontWeight: '600', color: '#212529', marginBottom: '12px' }}>
+                    {property.name}
+                  </h4>
+                  
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px', marginBottom: '16px' }}>
+                    <div>
+                      <p style={{ fontSize: '12px', color: '#6c757d', marginBottom: '4px' }}>Total Units</p>
+                      <p style={{ fontSize: '16px', fontWeight: '600', color: '#212529' }}>{property.units}</p>
                     </div>
-                    <div className="flex justify-between text-sm">
-                      <span className="text-gray-400">Occupancy</span>
-                      <span className="text-green-400">{property.metrics.occupancyRate}%</span>
-                    </div>
-                    <div className="flex justify-between text-sm">
-                      <span className="text-gray-400">Revenue</span>
-                      <span className="text-white">${property.monthlyRevenue.toLocaleString()}</span>
+                    <div>
+                      <p style={{ fontSize: '12px', color: '#6c757d', marginBottom: '4px' }}>Monthly Revenue</p>
+                      <p style={{ fontSize: '16px', fontWeight: '600', color: '#212529' }}>
+                        ${property.monthlyRevenue.toLocaleString()}
+                      </p>
                     </div>
                   </div>
-                  
-                  <div className="mt-4 pt-4 border-t border-white/10">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2">
-                        <div className={`w-2 h-2 rounded-full ${
-                          property.metrics.maintenanceScore > 80 ? 'bg-green-500' :
-                          property.metrics.maintenanceScore > 60 ? 'bg-yellow-500' :
-                          'bg-red-500'
-                        }`} />
-                        <span className="text-xs text-gray-400">Health Score</span>
-                      </div>
-                      <span className="text-sm font-medium text-white">
-                        {property.metrics.maintenanceScore}%
-                      </span>
+
+                  <div style={{
+                    padding: '12px',
+                    background: '#f8f9fa',
+                    borderRadius: '8px',
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center'
+                  }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                      <div style={{
+                        width: '8px',
+                        height: '8px',
+                        borderRadius: '50%',
+                        background: property.metrics.maintenanceScore > 80 ? '#28a745' :
+                                   property.metrics.maintenanceScore > 60 ? '#ffc107' : '#dc3545'
+                      }} />
+                      <span style={{ fontSize: '13px', color: '#6c757d' }}>Health Score</span>
                     </div>
+                    <span style={{ fontSize: '14px', fontWeight: '600', color: '#212529' }}>
+                      {property.metrics.maintenanceScore}%
+                    </span>
                   </div>
                 </div>
               </motion.div>
             ))}
           </div>
-        </motion.div>
-
-        {/* Real-time Stats Bar */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="mt-8 bg-gradient-to-r from-purple-600/20 to-pink-600/20 backdrop-blur-xl rounded-2xl border border-white/20 p-6"
-        >
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            <div className="text-center">
-              <div className="text-3xl font-bold text-white mb-1">
-                {realTimeData.activeUsers.toLocaleString()}
-              </div>
-              <p className="text-sm text-gray-400">Active Users</p>
-              <div className="mt-2 flex justify-center">
-                <div className="w-16 h-1 bg-gray-700 rounded-full overflow-hidden">
-                  <motion.div
-                    className="h-full bg-gradient-to-r from-green-400 to-green-600"
-                    animate={{ width: ['0%', '100%'] }}
-                    transition={{ duration: 2, repeat: Infinity }}
-                  />
-                </div>
-              </div>
-            </div>
-            
-            <div className="text-center">
-              <div className="text-3xl font-bold text-white mb-1">
-                {realTimeData.ongoingRepairs}
-              </div>
-              <p className="text-sm text-gray-400">Ongoing Repairs</p>
-              <div className="mt-2 flex justify-center">
-                <div className="w-16 h-1 bg-gray-700 rounded-full overflow-hidden">
-                  <motion.div
-                    className="h-full bg-gradient-to-r from-yellow-400 to-orange-600"
-                    animate={{ width: ['0%', '100%'] }}
-                    transition={{ duration: 2.5, repeat: Infinity }}
-                  />
-                </div>
-              </div>
-            </div>
-            
-            <div className="text-center">
-              <div className="text-3xl font-bold text-white mb-1">
-                ${realTimeData.revenue.toLocaleString()}
-              </div>
-              <p className="text-sm text-gray-400">Today's Revenue</p>
-              <div className="mt-2 flex justify-center">
-                <div className="w-16 h-1 bg-gray-700 rounded-full overflow-hidden">
-                  <motion.div
-                    className="h-full bg-gradient-to-r from-blue-400 to-purple-600"
-                    animate={{ width: ['0%', '100%'] }}
-                    transition={{ duration: 3, repeat: Infinity }}
-                  />
-                </div>
-              </div>
-            </div>
-            
-            <div className="text-center">
-              <div className="text-3xl font-bold text-white mb-1">
-                {realTimeData.satisfaction.toFixed(1)}/5.0
-              </div>
-              <p className="text-sm text-gray-400">Satisfaction Score</p>
-              <div className="mt-2 flex justify-center gap-1">
-                {[...Array(5)].map((_, i) => (
-                  <Star
-                    key={i}
-                    size={12}
-                    className={i < Math.floor(realTimeData.satisfaction) ? 'text-yellow-400 fill-current' : 'text-gray-600'}
-                  />
-                ))}
-              </div>
-            </div>
-          </div>
-        </motion.div>
+        </div>
       </div>
     </div>
   );
