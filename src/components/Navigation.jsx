@@ -37,7 +37,7 @@ function Navigation() {
         width: '100%'
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-          <h1 className="hero-title" style={{ fontSize: '28px', margin: 0, color: 'white' }}>DIY HEROES</h1>
+          <h1 className="hero-title" style={{ fontSize: '28px', margin: 0, color: 'white' }}>DIY HERO</h1>
           <div className="hero-avatar" style={{ width: '40px', height: '40px', fontSize: '18px', background: 'white', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             🦸
           </div>
