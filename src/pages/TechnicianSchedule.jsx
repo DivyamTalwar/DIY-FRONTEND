@@ -33,8 +33,106 @@ const TechnicianSchedule = () => {
   }, [selectedDate]);
 
   const loadTechnicians = async () => {
-    const data = await mockApi.getTechnicians();
-    setTechnicians(data);
+    // Generate comprehensive mock technician data
+    const mockTechnicians = [
+      {
+        id: 1,
+        name: 'Mike Johnson',
+        specialty: 'Master Plumber',
+        rating: 4.9,
+        jobs: 2847,
+        experience: '15 years',
+        certifications: ['Licensed Plumber', 'Gas Safe', 'EPA Certified'],
+        available: true,
+        responseTime: '15 min',
+        price: '$89/hr',
+        photo: '👨‍🔧',
+        bio: 'Expert in all residential and commercial plumbing issues',
+        reviews: 892,
+        badges: ['Top Rated', 'Quick Response', 'Expert']
+      },
+      {
+        id: 2,
+        name: 'Sarah Chen',
+        specialty: 'Electrical Expert',
+        rating: 4.8,
+        jobs: 1956,
+        experience: '12 years',
+        certifications: ['Master Electrician', 'OSHA Certified'],
+        available: true,
+        responseTime: '20 min',
+        price: '$95/hr',
+        photo: '👩‍🔧',
+        bio: 'Specialized in home automation and electrical repairs',
+        reviews: 743,
+        badges: ['Elite Pro', '24/7 Available']
+      },
+      {
+        id: 3,
+        name: 'John Davis',
+        specialty: 'HVAC Specialist',
+        rating: 4.7,
+        jobs: 1523,
+        experience: '10 years',
+        certifications: ['NATE Certified', 'EPA Universal'],
+        available: true,
+        responseTime: '25 min',
+        price: '$105/hr',
+        photo: '👨‍🔧',
+        bio: 'AC and heating expert, same-day service available',
+        reviews: 612,
+        badges: ['HVAC Pro', 'Energy Saver']
+      },
+      {
+        id: 4,
+        name: 'Emily Wilson',
+        specialty: 'Appliance Repair',
+        rating: 4.9,
+        jobs: 2134,
+        experience: '8 years',
+        certifications: ['Factory Certified', 'All Brands'],
+        available: true,
+        responseTime: '30 min',
+        price: '$79/hr',
+        photo: '👩‍🔧',
+        bio: 'All major appliance brands, warranty approved repairs',
+        reviews: 821,
+        badges: ['Appliance Expert', 'Same Day Fix']
+      },
+      {
+        id: 5,
+        name: 'Robert Lee',
+        specialty: 'General Handyman',
+        rating: 4.6,
+        jobs: 3456,
+        experience: '20 years',
+        certifications: ['Licensed Contractor', 'Bonded & Insured'],
+        available: false,
+        responseTime: 'Busy',
+        price: '$69/hr',
+        photo: '👨‍🔧',
+        bio: 'Jack of all trades, no job too small',
+        reviews: 1234,
+        badges: ['Veteran', 'Most Experienced']
+      },
+      {
+        id: 6,
+        name: 'Lisa Brown',
+        specialty: 'Emergency Services',
+        rating: 5.0,
+        jobs: 987,
+        experience: '7 years',
+        certifications: ['24/7 Emergency', 'Rapid Response'],
+        available: true,
+        responseTime: '10 min',
+        price: '$129/hr',
+        photo: '👩‍🔧',
+        bio: 'Available 24/7 for emergency repairs',
+        reviews: 456,
+        badges: ['Emergency Pro', 'Top Speed']
+      }
+    ];
+    setTechnicians(mockTechnicians);
   };
 
   const loadTimeSlots = async () => {
@@ -109,17 +207,7 @@ const TechnicianSchedule = () => {
     { id: 'general', name: 'General', icon: '🏠', time: '30-90 min' }
   ];
 
-  const topTechnicians = technicians.slice(0, 6).map((tech, i) => ({
-    ...tech,
-    name: ['Mike Johnson', 'Sarah Chen', 'John Davis', 'Emily Wilson', 'Robert Lee', 'Lisa Brown'][i],
-    rating: 4.5 + Math.random() * 0.5,
-    jobs: Math.floor(500 + Math.random() * 2000),
-    specialty: ['Plumbing Expert', 'Electrical Pro', 'HVAC Master', 'Appliance Guru', 'General Expert', 'Emergency Specialist'][i],
-    available: Math.random() > 0.3,
-    responseTime: Math.floor(15 + Math.random() * 45),
-    price: Math.floor(89 + Math.random() * 60),
-    badges: Math.floor(Math.random() * 5) + 1
-  }));
+  const topTechnicians = technicians.slice(0, 6);
 
   return (
     <div className="technician-schedule-container">

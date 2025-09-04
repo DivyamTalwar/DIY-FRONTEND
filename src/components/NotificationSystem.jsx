@@ -330,7 +330,7 @@ function NotificationSystem() {
         )}
       </AnimatePresence>
 
-      <style jsx>{`
+      <style>{`
         .notification-toast {
           position: fixed;
           bottom: 20px;

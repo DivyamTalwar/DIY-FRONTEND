@@ -22,7 +22,12 @@ import './App.css';
 const PremiumAnalytics = lazy(() => import('./pages/PremiumAnalytics'));
 const TenantPortal = lazy(() => import('./pages/TenantPortal'));
 const FinancialManagement = lazy(() => import('./pages/FinancialManagement'));
+const VideoCallSupport = lazy(() => import('./pages/VideoCallSupport'));
 const UltraModernDashboard = lazy(() => import('./pages/UltraModernDashboard'));
+const DIYHeroDashboard = lazy(() => import('./pages/DIYHeroDashboard'));
+const AIPhotoCapture = lazy(() => import('./pages/AIPhotoCapture'));
+const EnhancedPropertyManager = lazy(() => import('./pages/EnhancedPropertyManager'));
+const DIYHeroAnalytics = lazy(() => import('./pages/DIYHeroAnalytics'));
 
 // Loading component
 const LoadingSpinner = () => (
@@ -38,7 +43,7 @@ const LoadingSpinner = () => (
   }}>
     <div style={{ textAlign: 'center' }}>
       <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>🚀</div>
-      <div>Loading your DIY Heroes experience...</div>
+      <div>Loading DIY Hero Platform...</div>
     </div>
   </div>
 );
@@ -52,7 +57,8 @@ function App() {
           <NotificationSystem />
           <ChatSupport />
           <Routes>
-            <Route path="/" element={<UltraModernDashboard />} />
+            <Route path="/" element={<DIYHeroDashboard />} />
+            <Route path="/photo-capture" element={<AIPhotoCapture />} />
             <Route path="/emergency" element={<EmergencyLanding />} />
             <Route path="/smart-diagnosis" element={<SmartDiagnosis />} />
             <Route path="/guided-repair/:id" element={<GuidedRepair />} />
@@ -61,13 +67,14 @@ function App() {
             <Route path="/dashboard" element={<ModernDashboard />} />
             <Route path="/new-repair" element={<UltimateNewRepair />} />
             <Route path="/repair/:id" element={<RepairWorkflow />} />
-            <Route path="/property-manager" element={<PropertyManager />} />
+            <Route path="/property-manager" element={<EnhancedPropertyManager />} />
             <Route path="/schedule-technician" element={<TechnicianSchedule />} />
             <Route path="/achievements" element={<ModernAchievements />} />
             <Route path="/leaderboard" element={<EpicLeaderboard />} />
-            <Route path="/analytics" element={<PremiumAnalytics />} />
+            <Route path="/analytics" element={<DIYHeroAnalytics />} />
             <Route path="/tenant-portal" element={<TenantPortal />} />
             <Route path="/financial" element={<FinancialManagement />} />
+            <Route path="/video-call-support" element={<VideoCallSupport />} />
           </Routes>
           <Toaster 
             position="bottom-center"
