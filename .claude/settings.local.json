@@ -1,13 +1,11 @@
 {
   "permissions": {
     "allow": [
-      "Bash(npm install:*)",
-      "Bash(npm uninstall:*)",
-      "Bash(npm start)",
-      "Bash(npm run build:*)",
-      "Bash(npm run dev:*)",
-      "Bash(npx tailwindcss init:*)",
-      "Bash(del tailwind.config.js)"
+      "Bash(dir:*)",
+      "Bash(grep:*)",
+      "Bash(npx eslint:*)",
+      "Bash(node:*)",
+      "Bash(npx babel:*)"
     ],
     "deny": [],
     "ask": []

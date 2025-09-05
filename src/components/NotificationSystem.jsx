@@ -9,16 +9,151 @@ import {
   Users, 
   X,
   Zap,
-  TrendingUp
+  TrendingUp,
+  ChevronRight,
+  Wrench,
+  Building,
+  Calendar,
+  MessageSquare
 } from 'lucide-react';
 import { api } from '../services/mockApi';
+import { useLocation } from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 function NotificationSystem() {
   const [notifications, setNotifications] = useState([]);
   const [showPanel, setShowPanel] = useState(false);
   const [unreadCount, setUnreadCount] = useState(0);
+  const [selectedNotification, setSelectedNotification] = useState(null);
+  const [showDetailModal, setShowDetailModal] = useState(false);
+  const location = useLocation();
+  
+  // Check if user is manager or tenant based on route
+  const isManager = location.pathname.includes('manager') || location.pathname.includes('property-manager');
 
   useEffect(() => {
+    // Determine mock notifications based on current path
+    const currentMockNotifications = isManager ? [
+      { 
+        id: 1, 
+        type: 'urgent', 
+        title: 'Emergency Maintenance Request', 
+        message: 'Unit 8A - AC system failure requires immediate attention', 
+        time: '5 mins ago', 
+        read: false, 
+        priority: 'high',
+        property: 'Sunset Apartments',
+        unit: '8A',
+        tenant: 'John Smith',
+        estimatedCost: '$450',
+        data: { xpBonus: 50, saved: 200 }
+      },
+      { 
+        id: 2, 
+        type: 'financial', 
+        title: 'Revenue Milestone Achieved', 
+        message: 'Q1 revenue exceeded targets by 15% - $3.2M achieved!', 
+        time: '30 mins ago', 
+        read: false,
+        amount: '+$450K',
+        percentage: '+15%',
+        data: { saved: 450000 }
+      },
+      { 
+        id: 3, 
+        type: 'tenant', 
+        title: 'New Tenant Applications', 
+        message: '3 new applications received for Downtown Towers', 
+        time: '1 hour ago', 
+        read: false,
+        count: 3,
+        property: 'Downtown Towers',
+        data: {}
+      },
+      { 
+        id: 4, 
+        type: 'compliance', 
+        title: 'Inspection Report Available', 
+        message: 'Building C passed annual safety inspection with excellence', 
+        time: '2 hours ago', 
+        read: true,
+        rating: '98/100',
+        inspector: 'City Safety Department',
+        data: {}
+      },
+      { 
+        id: 5, 
+        type: 'performance', 
+        title: 'DIY Success Rate Update', 
+        message: 'Tenant DIY repairs saved $47K this month', 
+        time: '3 hours ago', 
+        read: true,
+        savings: '$47,892',
+        repairsCompleted: 156,
+        data: { saved: 47892 }
+      }
+    ] : [
+      { 
+        id: 1, 
+        type: 'repair', 
+        title: 'Faucet Leak Fixed!', 
+        message: 'Great job! You saved $200 by fixing it yourself', 
+        time: '2 mins ago', 
+        read: false,
+        points: 75,
+        savedAmount: '$200',
+        data: { xpBonus: 75, saved: 200 }
+      },
+      { 
+        id: 2, 
+        type: 'achievement', 
+        title: 'New Badge Unlocked', 
+        message: 'You earned the "Speed Demon" badge for quick repairs!', 
+        time: '1 hour ago', 
+        read: false,
+        badge: '🏆',
+        points: 200,
+        data: { xpBonus: 200 }
+      },
+      { 
+        id: 3, 
+        type: 'reminder', 
+        title: 'AC Filter Replacement Due', 
+        message: 'Time to replace your AC filter for optimal performance', 
+        time: '3 hours ago', 
+        read: false,
+        dueIn: '2 days',
+        tutorial: 'Available',
+        data: {}
+      },
+      { 
+        id: 4, 
+        type: 'community', 
+        title: 'Neighbor Needs Help', 
+        message: 'John in 4B needs help with a toilet issue', 
+        time: '5 hours ago', 
+        read: true,
+        reward: '50 points',
+        unit: '4B',
+        data: { xpBonus: 50 }
+      },
+      { 
+        id: 5, 
+        type: 'reward', 
+        title: 'Points Milestone Reached!', 
+        message: 'You reached 5000 points! Claim your reward', 
+        time: 'Yesterday', 
+        read: true,
+        milestone: 5000,
+        rewardType: 'Gift Card',
+        data: { xpBonus: 500 }
+      }
+    ];
+    
+    // Load mock notifications based on user type
+    setNotifications(currentMockNotifications);
+    setUnreadCount(currentMockNotifications.filter(n => !n.read).length);
+    
     // Listen for real-time notifications
     window.onNotification = (notification) => {
       setNotifications(prev => [notification, ...prev].slice(0, 10));
@@ -28,13 +163,10 @@ function NotificationSystem() {
       showToast(notification);
     };
 
-    // Load initial notifications
-    loadNotifications();
-
     return () => {
       window.onNotification = null;
     };
-  }, []);
+  }, [location.pathname, isManager]); // Re-run when path or user type changes
 
   const loadNotifications = async () => {
     const { notifications: data } = await api.getNotifications();
@@ -243,12 +375,17 @@ function NotificationSystem() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: index * 0.05 }}
-                    onClick={() => !notification.read && markAsRead(notification.id)}
+                    onClick={() => {
+                      if (!notification.read) markAsRead(notification.id);
+                      setSelectedNotification(notification);
+                      setShowDetailModal(true);
+                    }}
+                    whileHover={{ backgroundColor: '#f3f4f6' }}
                     style={{
                       padding: '16px 20px',
                       borderBottom: '1px solid #f3f4f6',
                       background: notification.read ? 'white' : '#f9fafb',
-                      cursor: notification.read ? 'default' : 'pointer',
+                      cursor: 'pointer',
                       transition: 'background 0.2s'
                     }}
                   >
@@ -309,8 +446,36 @@ function NotificationSystem() {
                           color: '#9ca3af',
                           marginTop: '4px'
                         }}>
-                          {new Date(notification.timestamp).toLocaleTimeString()}
+                          {notification.time || new Date(notification.timestamp || Date.now()).toLocaleTimeString()}
                         </div>
+                        {notification.property && (
+                          <span style={{
+                            padding: '2px 6px',
+                            background: '#e0e7ff',
+                            borderRadius: '4px',
+                            color: '#4338ca',
+                            marginTop: '4px',
+                            fontSize: '11px',
+                            display: 'inline-block'
+                          }}>
+                            {notification.property}
+                          </span>
+                        )}
+                        {notification.priority === 'high' && (
+                          <span style={{
+                            padding: '2px 6px',
+                            background: '#fee2e2',
+                            borderRadius: '4px',
+                            color: '#dc2626',
+                            fontWeight: 'bold',
+                            marginTop: '4px',
+                            marginLeft: '4px',
+                            fontSize: '11px',
+                            display: 'inline-block'
+                          }}>
+                            URGENT
+                          </span>
+                        )}
                       </div>
                       {!notification.read && (
                         <div style={{
@@ -326,6 +491,265 @@ function NotificationSystem() {
                 ))
               )}
             </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Detail Modal */}
+      <AnimatePresence>
+        {showDetailModal && selectedNotification && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setShowDetailModal(false)}
+            style={{
+              position: 'fixed',
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              background: 'rgba(0, 0, 0, 0.5)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              zIndex: 10000
+            }}
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              onClick={(e) => e.stopPropagation()}
+              style={{
+                background: 'white',
+                borderRadius: '20px',
+                padding: '32px',
+                maxWidth: '500px',
+                width: '90%',
+                maxHeight: '80vh',
+                overflow: 'auto',
+                boxShadow: '0 20px 60px rgba(0,0,0,0.3)'
+              }}
+            >
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '24px' }}>
+                <div style={{ display: 'flex', gap: '16px', alignItems: 'flex-start' }}>
+                  <div style={{ 
+                    width: '48px', 
+                    height: '48px', 
+                    borderRadius: '12px',
+                    background: selectedNotification.type === 'urgent' || selectedNotification.type === 'error' ? '#fee2e2' :
+                               selectedNotification.type === 'financial' || selectedNotification.type === 'achievement' ? '#fef3c7' :
+                               selectedNotification.type === 'tenant' || selectedNotification.type === 'community' ? '#dbeafe' :
+                               '#f3f4f6',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center'
+                  }}>
+                    {selectedNotification.type === 'achievement' ? '🏆' :
+                     selectedNotification.type === 'repair' ? '🔧' :
+                     selectedNotification.type === 'urgent' ? <AlertCircle size={24} color="#ef4444" /> :
+                     selectedNotification.type === 'financial' ? <DollarSign size={24} color="#f59e0b" /> :
+                     selectedNotification.type === 'tenant' || selectedNotification.type === 'community' ? <Users size={24} color="#3b82f6" /> :
+                     <Bell size={24} color="#6b7280" />}
+                  </div>
+                  <div>
+                    <h2 style={{ fontSize: '20px', fontWeight: 'bold', margin: '0 0 4px 0' }}>
+                      {selectedNotification.title}
+                    </h2>
+                    <p style={{ fontSize: '14px', color: '#6b7280', margin: 0 }}>
+                      {selectedNotification.time}
+                    </p>
+                  </div>
+                </div>
+                <button
+                  onClick={() => setShowDetailModal(false)}
+                  style={{
+                    background: 'transparent',
+                    border: 'none',
+                    cursor: 'pointer',
+                    padding: '4px'
+                  }}
+                >
+                  <X size={20} color="#6b7280" />
+                </button>
+              </div>
+
+              <div style={{ marginBottom: '24px' }}>
+                <p style={{ fontSize: '16px', lineHeight: '1.6', color: '#374151' }}>
+                  {selectedNotification.message}
+                </p>
+              </div>
+
+              {/* Additional Details Based on Type */}
+              {isManager && selectedNotification.property && (
+                <div style={{ 
+                  background: '#f9fafb', 
+                  borderRadius: '12px', 
+                  padding: '16px',
+                  marginBottom: '16px'
+                }}>
+                  <h3 style={{ fontSize: '14px', fontWeight: '600', marginBottom: '12px', color: '#6b7280' }}>
+                    Property Details
+                  </h3>
+                  <div style={{ display: 'grid', gap: '8px' }}>
+                    {selectedNotification.property && (
+                      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                        <span style={{ color: '#6b7280' }}>Property:</span>
+                        <span style={{ fontWeight: '600' }}>{selectedNotification.property}</span>
+                      </div>
+                    )}
+                    {selectedNotification.unit && (
+                      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                        <span style={{ color: '#6b7280' }}>Unit:</span>
+                        <span style={{ fontWeight: '600' }}>{selectedNotification.unit}</span>
+                      </div>
+                    )}
+                    {selectedNotification.tenant && (
+                      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                        <span style={{ color: '#6b7280' }}>Tenant:</span>
+                        <span style={{ fontWeight: '600' }}>{selectedNotification.tenant}</span>
+                      </div>
+                    )}
+                    {selectedNotification.estimatedCost && (
+                      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                        <span style={{ color: '#6b7280' }}>Est. Cost:</span>
+                        <span style={{ fontWeight: '600', color: '#ef4444' }}>{selectedNotification.estimatedCost}</span>
+                      </div>
+                    )}
+                    {selectedNotification.amount && (
+                      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                        <span style={{ color: '#6b7280' }}>Amount:</span>
+                        <span style={{ fontWeight: '600', color: '#10b981' }}>{selectedNotification.amount}</span>
+                      </div>
+                    )}
+                    {selectedNotification.savings && (
+                      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                        <span style={{ color: '#6b7280' }}>Savings:</span>
+                        <span style={{ fontWeight: '600', color: '#10b981' }}>{selectedNotification.savings}</span>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
+
+              {!isManager && (selectedNotification.points || selectedNotification.savedAmount) && (
+                <div style={{ 
+                  background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)', 
+                  borderRadius: '12px', 
+                  padding: '16px',
+                  marginBottom: '16px',
+                  color: 'white'
+                }}>
+                  <h3 style={{ fontSize: '14px', fontWeight: '600', marginBottom: '12px', opacity: 0.9 }}>
+                    Rewards & Savings
+                  </h3>
+                  <div style={{ display: 'grid', gap: '8px' }}>
+                    {selectedNotification.points && (
+                      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                        <span style={{ opacity: 0.9 }}>Points Earned:</span>
+                        <span style={{ fontWeight: 'bold', fontSize: '18px' }}>+{selectedNotification.points} XP</span>
+                      </div>
+                    )}
+                    {selectedNotification.savedAmount && (
+                      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                        <span style={{ opacity: 0.9 }}>Money Saved:</span>
+                        <span style={{ fontWeight: 'bold', fontSize: '18px' }}>{selectedNotification.savedAmount}</span>
+                      </div>
+                    )}
+                    {selectedNotification.badge && (
+                      <div style={{ textAlign: 'center', marginTop: '8px' }}>
+                        <div style={{ fontSize: '48px', marginBottom: '8px' }}>{selectedNotification.badge}</div>
+                        <div style={{ fontSize: '12px', opacity: 0.9 }}>New Badge Unlocked!</div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
+
+              {/* Action Buttons */}
+              <div style={{ display: 'flex', gap: '12px', marginTop: '24px' }}>
+                {selectedNotification.type === 'urgent' && isManager && (
+                  <button
+                    style={{
+                      flex: 1,
+                      padding: '12px',
+                      background: '#ef4444',
+                      color: 'white',
+                      border: 'none',
+                      borderRadius: '8px',
+                      fontWeight: '600',
+                      cursor: 'pointer'
+                    }}
+                  >
+                    Assign Technician
+                  </button>
+                )}
+                {selectedNotification.type === 'tenant' && isManager && (
+                  <button
+                    style={{
+                      flex: 1,
+                      padding: '12px',
+                      background: '#3b82f6',
+                      color: 'white',
+                      border: 'none',
+                      borderRadius: '8px',
+                      fontWeight: '600',
+                      cursor: 'pointer'
+                    }}
+                  >
+                    Review Applications
+                  </button>
+                )}
+                {selectedNotification.type === 'reminder' && !isManager && (
+                  <button
+                    style={{
+                      flex: 1,
+                      padding: '12px',
+                      background: '#10b981',
+                      color: 'white',
+                      border: 'none',
+                      borderRadius: '8px',
+                      fontWeight: '600',
+                      cursor: 'pointer'
+                    }}
+                  >
+                    View Tutorial
+                  </button>
+                )}
+                {selectedNotification.type === 'community' && !isManager && (
+                  <button
+                    style={{
+                      flex: 1,
+                      padding: '12px',
+                      background: '#667eea',
+                      color: 'white',
+                      border: 'none',
+                      borderRadius: '8px',
+                      fontWeight: '600',
+                      cursor: 'pointer'
+                    }}
+                  >
+                    Offer Help
+                  </button>
+                )}
+                <button
+                  onClick={() => setShowDetailModal(false)}
+                  style={{
+                    flex: 1,
+                    padding: '12px',
+                    background: '#f3f4f6',
+                    color: '#6b7280',
+                    border: 'none',
+                    borderRadius: '8px',
+                    fontWeight: '600',
+                    cursor: 'pointer'
+                  }}
+                >
+                  Close
+                </button>
+              </div>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
