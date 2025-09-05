@@ -1074,802 +1074,345 @@ const ManagerDashboard = ({ navigate, realTimeMetrics, managerData }) => {
           }}
           whileTap={{ scale: 0.95 }}
           onClick={() => handleMetricClick('properties', '🏰 PROPERTY EMPIRE', '238')}
-          animate={{
-            boxShadow: [
-              '0 10px 40px rgba(102,126,234,0.2)',
-              '0 20px 60px rgba(118,75,162,0.3)',
-              '0 10px 40px rgba(102,126,234,0.2)'
-            ]
-          }}
-          transition={{
-            boxShadow: {
-              duration: 2.5,
-              repeat: Infinity,
-              ease: 'easeInOut'
-            }
-          }}
           style={{
             cursor: 'pointer',
-            background: 'linear-gradient(135deg, #667eea 0%, #764ba2 40%, #9F7AEA 100%)',
-            borderRadius: '28px',
-            padding: '16px',
+            background: 'linear-gradient(145deg, #ffffff 0%, #f5f7ff 100%)',
+            borderRadius: '24px',
+            padding: '20px',
+            boxShadow: '0 10px 40px rgba(0,0,0,0.06)',
             position: 'relative',
-            overflow: 'visible',
-            border: '3px solid rgba(255,255,255,0.5)',
-            transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
-            transform: 'translateZ(0)'
+            overflow: 'hidden',
+            border: '1px solid rgba(102,126,234,0.08)',
+            transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
           }}
         >
-          {/* Floating Kingdom Icons */}
           <div style={{
             position: 'absolute',
-            top: '-8px',
-            right: '10px',
-            fontSize: '16px',
-            animation: 'float 3s ease-in-out infinite'
-          }}>🏰</div>
-          <div style={{
-            position: 'absolute',
-            bottom: '-5px',
-            left: '-5px',
-            fontSize: '18px',
-            animation: 'bounce 2s ease-in-out infinite 0.5s'
-          }}>🏢</div>
-          
-          {/* Shine Effect */}
-          <div style={{
-            position: 'absolute',
-            top: 0,
-            left: '-100%',
-            width: '200%',
-            height: '100%',
-            background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.3) 50%, transparent 100%)',
-            animation: 'shine 3s ease-in-out infinite'
+            top: -40,
+            right: -40,
+            width: '150px',
+            height: '150px',
+            background: 'radial-gradient(circle, rgba(102,126,234,0.15) 0%, transparent 70%)',
+            borderRadius: '50%',
+            animation: 'pulse 3s ease-in-out infinite'
           }} />
-          
-          {/* Content */}
-          <div style={{ position: 'relative', zIndex: 5 }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '10px' }}>
-              <motion.div
-                animate={{ scale: [1, 1.1, 1] }}
-                transition={{ duration: 2, repeat: Infinity }}
-                style={{
-                  width: '50px',
-                  height: '50px',
-                  background: 'linear-gradient(135deg, rgba(255,255,255,0.95), rgba(255,255,255,0.85))',
-                  borderRadius: '18px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  boxShadow: '0 10px 30px rgba(0,0,0,0.2)',
-                  border: '2px solid rgba(255,255,255,0.6)'
-                }}
-              >
-                <Building size={30} style={{ 
-                  color: '#667eea', 
-                  strokeWidth: 3,
-                  filter: 'drop-shadow(0 3px 6px rgba(102,126,234,0.4))'
-                }} />
-              </motion.div>
-              
-              {/* Badges */}
+          <div style={{ position: 'relative', zIndex: 1 }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '12px' }}>
               <div style={{
+                width: '42px',
+                height: '42px',
+                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                borderRadius: '14px',
                 display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'flex-end',
-                gap: '4px'
+                alignItems: 'center',
+                justifyContent: 'center',
+                boxShadow: '0 6px 20px rgba(102,126,234,0.25)'
               }}>
-                <div style={{
-                  padding: '3px 8px',
-                  background: 'linear-gradient(135deg, #FFD700, #FFA500)',
-                  borderRadius: '12px',
-                  boxShadow: '0 4px 12px rgba(255,215,0,0.4)'
-                }}>
-                  <span style={{ fontSize: '10px', fontWeight: '900', color: '#7C2D12' }}>
-                    🏆 EMPIRE
-                  </span>
-                </div>
-                <motion.div
-                  animate={{ scale: [1, 1.05, 1] }}
-                  transition={{ duration: 1.5, repeat: Infinity }}
-                  style={{
-                    padding: '5px 10px',
-                    background: 'linear-gradient(135deg, #ffffff, #f5f3ff)',
-                    borderRadius: '20px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '4px',
-                    border: '1px solid rgba(255,255,255,0.3)'
-                  }}
-                >
-                  <ArrowUpRight size={14} style={{ color: '#667eea', strokeWidth: 3 }} />
-                  <span style={{ fontSize: '13px', fontWeight: '900', color: '#667eea' }}>
-                    +18
-                  </span>
-                </motion.div>
+                <Building size={22} style={{ color: 'white', strokeWidth: 2.5 }} />
+              </div>
+              <div style={{
+                padding: '6px 12px',
+                background: 'linear-gradient(135deg, #d4f4dd 0%, #bbf7d0 100%)',
+                borderRadius: '100px',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '5px',
+                boxShadow: '0 2px 8px rgba(34,197,94,0.15)'
+              }}>
+                <ArrowUpRight size={14} style={{ color: '#16a34a', strokeWidth: 3 }} />
+                <span style={{ fontSize: '12px', fontWeight: '700', color: '#16a34a' }}>
+                  +18
+                </span>
               </div>
             </div>
-            
-            <div style={{
-              background: 'linear-gradient(135deg, rgba(255,255,255,0.98), rgba(255,255,255,0.92))',
-              borderRadius: '20px',
-              padding: '10px',
-              backdropFilter: 'blur(20px)',
-              boxShadow: 'inset 0 4px 12px rgba(0,0,0,0.08)',
-              border: '1px solid rgba(255,255,255,0.8)'
-            }}>
-              <div style={{ textAlign: 'center', marginBottom: '8px' }}>
-                <motion.div
-                  animate={{ 
-                    textShadow: [
-                      '0 0 20px rgba(102,126,234,0.5)',
-                      '0 0 40px rgba(102,126,234,0.8)',
-                      '0 0 20px rgba(102,126,234,0.5)'
-                    ]
-                  }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                  style={{ 
-                    fontSize: '42px', 
-                    fontWeight: '900', 
-                    background: 'linear-gradient(135deg, #667eea, #764ba2)',
-                    WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent',
-                    margin: 0,
-                    letterSpacing: '-2px'
-                  }}
-                >
-                  238
-                </motion.div>
-                <p style={{ 
-                  fontSize: '11px', 
-                  color: '#374151', 
-                  margin: '4px 0 0 0', 
-                  fontWeight: '800',
-                  textTransform: 'uppercase'
-                }}>
-                  Property Empire 🏰
-                </p>
-              </div>
-              
-              <motion.div
-                animate={{
-                  background: [
-                    'linear-gradient(135deg, #e9d5ff, #d8b4fe)',
-                    'linear-gradient(135deg, #d8b4fe, #c084fc)',
-                    'linear-gradient(135deg, #e9d5ff, #d8b4fe)'
-                  ]
-                }}
-                transition={{ duration: 3, repeat: Infinity }}
-                style={{
-                  padding: '8px',
-                  borderRadius: '12px',
-                  border: '2px solid #9333ea',
-                  boxShadow: '0 4px 12px rgba(147,51,234,0.3)'
-                }}
-              >
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <div>
-                    <p style={{ fontSize: '16px', fontWeight: '900', color: '#581c87', margin: 0 }}>
-                      $1.87B
-                    </p>
-                    <p style={{ fontSize: '8px', color: '#6b21a8', margin: 0, fontWeight: '700' }}>
-                      PORTFOLIO VALUE
-                    </p>
-                  </div>
-                  <div style={{
-                    padding: '4px 8px',
-                    background: '#581c87',
-                    borderRadius: '8px'
-                  }}>
-                    <span style={{ fontSize: '10px', fontWeight: '800', color: '#e9d5ff' }}>
-                      12 CITIES
-                    </span>
-                  </div>
-                </div>
-              </motion.div>
+            <div>
+              <h3 style={{ 
+                fontSize: '32px', 
+                fontWeight: '900', 
+                color: '#0f172a', 
+                margin: '0 0 4px 0',
+                letterSpacing: '-0.5px'
+              }}>
+                238
+              </h3>
+              <p style={{ 
+                fontSize: '13px', 
+                color: '#475569', 
+                margin: 0, 
+                fontWeight: '600',
+                letterSpacing: '0.3px'
+              }}>
+                Properties Managed
+              </p>
+              <p style={{ 
+                fontSize: '11px', 
+                color: '#94a3b8', 
+                margin: '2px 0 0 0',
+                fontWeight: '500'
+              }}>
+                12 cities • 4,865 units
+              </p>
             </div>
           </div>
         </motion.div>
 
-        {/* ⭐⭐⭐ LEGENDARY OCCUPANCY EXCELLENCE - THE GOLDEN RATIO ⭐⭐⭐ */}
+        {/* Occupancy Excellence - Premium Design */}
         <motion.div
-          whileHover={{ 
-            scale: 1.08, 
-            y: -12, 
-            boxShadow: '0 40px 80px rgba(240,147,251,0.4)',
-            rotate: [0, 1, -1, 1, 0],
-            transition: { duration: 0.3 }
-          }}
-          whileTap={{ scale: 0.95 }}
-          onClick={() => handleMetricClick('occupancy', '⭐ OCCUPANCY MASTERY', '97.3%')}
-          animate={{
-            boxShadow: [
-              '0 10px 40px rgba(240,147,251,0.2)',
-              '0 20px 60px rgba(245,87,108,0.3)',
-              '0 10px 40px rgba(240,147,251,0.2)'
-            ]
-          }}
-          transition={{
-            boxShadow: {
-              duration: 2.5,
-              repeat: Infinity,
-              ease: 'easeInOut'
-            }
-          }}
+          whileHover={{ scale: 1.03, y: -8, boxShadow: '0 25px 50px rgba(240,147,251,0.15)' }}
+          whileTap={{ scale: 0.98 }}
+          onClick={() => handleMetricClick('occupancy', 'Occupancy Excellence', '97.3%')}
           style={{
             cursor: 'pointer',
-            background: 'linear-gradient(135deg, #f093fb 0%, #f5576c 40%, #ff6b9d 100%)',
-            borderRadius: '28px',
-            padding: '16px',
+            background: 'linear-gradient(145deg, #ffffff 0%, #fdf4ff 100%)',
+            borderRadius: '24px',
+            padding: '20px',
+            boxShadow: '0 10px 40px rgba(0,0,0,0.06)',
             position: 'relative',
-            overflow: 'visible',
-            border: '3px solid rgba(255,255,255,0.5)',
-            transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
-            transform: 'translateZ(0)'
+            overflow: 'hidden',
+            border: '1px solid rgba(240,147,251,0.08)',
+            transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
           }}
         >
-          {/* Floating Icons */}
           <div style={{
             position: 'absolute',
-            top: '-8px',
-            left: '10px',
-            fontSize: '16px',
-            animation: 'bounce 2.5s ease-in-out infinite'
-          }}>🏠</div>
-          <div style={{
-            position: 'absolute',
-            bottom: '-5px',
-            right: '-5px',
-            fontSize: '18px',
-            animation: 'float 3s ease-in-out infinite 0.5s'
-          }}>⭐</div>
-          
-          {/* Shine */}
-          <div style={{
-            position: 'absolute',
-            top: 0,
-            left: '-100%',
-            width: '200%',
-            height: '100%',
-            background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.3) 50%, transparent 100%)',
-            animation: 'shine 3s ease-in-out infinite'
+            top: -40,
+            right: -40,
+            width: '150px',
+            height: '150px',
+            background: 'radial-gradient(circle, rgba(240,147,251,0.15) 0%, transparent 70%)',
+            borderRadius: '50%',
+            animation: 'pulse 3s ease-in-out infinite'
           }} />
-          
-          <div style={{ position: 'relative', zIndex: 5 }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '10px' }}>
-              <motion.div
-                animate={{ scale: [1, 1.1, 1] }}
-                transition={{ duration: 2, repeat: Infinity }}
-                style={{
-                  width: '50px',
-                  height: '50px',
-                  background: 'linear-gradient(135deg, rgba(255,255,255,0.95), rgba(255,255,255,0.85))',
-                  borderRadius: '18px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  boxShadow: '0 10px 30px rgba(0,0,0,0.2)',
-                  border: '2px solid rgba(255,255,255,0.6)'
-                }}
-              >
-                <Home size={30} style={{ 
-                  color: '#f093fb', 
-                  strokeWidth: 3,
-                  filter: 'drop-shadow(0 3px 6px rgba(240,147,251,0.4))'
-                }} />
-              </motion.div>
-              
+          <div style={{ position: 'relative', zIndex: 1 }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '12px' }}>
               <div style={{
+                width: '42px',
+                height: '42px',
+                background: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
+                borderRadius: '14px',
                 display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'flex-end',
-                gap: '4px'
+                alignItems: 'center',
+                justifyContent: 'center',
+                boxShadow: '0 6px 20px rgba(240,147,251,0.25)'
               }}>
-                <div style={{
-                  padding: '3px 8px',
-                  background: 'linear-gradient(135deg, #FFD700, #FFA500)',
-                  borderRadius: '12px'
-                }}>
-                  <span style={{ fontSize: '10px', fontWeight: '900', color: '#7C2D12' }}>
-                    🎯 PERFECT
-                  </span>
-                </div>
-                <motion.div
-                  animate={{ scale: [1, 1.05, 1] }}
-                  transition={{ duration: 1.5, repeat: Infinity }}
-                  style={{
-                    padding: '5px 10px',
-                    background: 'linear-gradient(135deg, #ffffff, #fdf4ff)',
-                    borderRadius: '20px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '4px'
-                  }}
-                >
-                  <ArrowUpRight size={14} style={{ color: '#f093fb', strokeWidth: 3 }} />
-                  <span style={{ fontSize: '13px', fontWeight: '900', color: '#f093fb' }}>
-                    +3.2%
-                  </span>
-                </motion.div>
+                <Home size={22} style={{ color: 'white', strokeWidth: 2.5 }} />
+              </div>
+              <div style={{
+                padding: '6px 12px',
+                background: 'linear-gradient(135deg, #d4f4dd 0%, #bbf7d0 100%)',
+                borderRadius: '100px',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '5px',
+                boxShadow: '0 2px 8px rgba(34,197,94,0.15)'
+              }}>
+                <ArrowUpRight size={14} style={{ color: '#16a34a', strokeWidth: 3 }} />
+                <span style={{ fontSize: '12px', fontWeight: '700', color: '#16a34a' }}>
+                  3.2%
+                </span>
               </div>
             </div>
-            
-            <div style={{
-              background: 'linear-gradient(135deg, rgba(255,255,255,0.98), rgba(255,255,255,0.92))',
-              borderRadius: '20px',
-              padding: '10px',
-              backdropFilter: 'blur(20px)',
-              border: '1px solid rgba(255,255,255,0.8)'
-            }}>
-              <div style={{ textAlign: 'center', marginBottom: '8px' }}>
-                <motion.div
-                  animate={{ 
-                    textShadow: [
-                      '0 0 20px rgba(240,147,251,0.5)',
-                      '0 0 40px rgba(240,147,251,0.8)',
-                      '0 0 20px rgba(240,147,251,0.5)'
-                    ]
-                  }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                  style={{ 
-                    fontSize: '42px', 
-                    fontWeight: '900', 
-                    background: 'linear-gradient(135deg, #f093fb, #f5576c)',
-                    WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent',
-                    margin: 0
-                  }}
-                >
-                  97.3%
-                </motion.div>
-                <p style={{ 
-                  fontSize: '11px', 
-                  color: '#374151', 
-                  margin: '4px 0 0 0', 
-                  fontWeight: '800',
-                  textTransform: 'uppercase'
-                }}>
-                  Occupancy Rate ⭐
-                </p>
-              </div>
-              
-              <motion.div
-                animate={{
-                  background: [
-                    'linear-gradient(135deg, #fce4ec, #f8bbd0)',
-                    'linear-gradient(135deg, #f8bbd0, #f48fb1)',
-                    'linear-gradient(135deg, #fce4ec, #f8bbd0)'
-                  ]
-                }}
-                transition={{ duration: 3, repeat: Infinity }}
-                style={{
-                  padding: '8px',
-                  borderRadius: '12px',
-                  border: '2px solid #ec407a'
-                }}
-              >
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <div>
-                    <p style={{ fontSize: '16px', fontWeight: '900', color: '#880e4f', margin: 0 }}>
-                      4,734
-                    </p>
-                    <p style={{ fontSize: '8px', color: '#ad1457', margin: 0, fontWeight: '700' }}>
-                      UNITS FILLED
-                    </p>
-                  </div>
-                  <div style={{
-                    padding: '4px 8px',
-                    background: '#880e4f',
-                    borderRadius: '8px'
-                  }}>
-                    <span style={{ fontSize: '10px', fontWeight: '800', color: '#fce4ec' }}>
-                      TOP 1%
-                    </span>
-                  </div>
-                </div>
-              </motion.div>
+            <div>
+              <h3 style={{ 
+                fontSize: '32px', 
+                fontWeight: '900', 
+                color: '#0f172a', 
+                margin: '0 0 4px 0',
+                letterSpacing: '-0.5px'
+              }}>
+                97.3%
+              </h3>
+              <p style={{ 
+                fontSize: '13px', 
+                color: '#475569', 
+                margin: 0, 
+                fontWeight: '600',
+                letterSpacing: '0.3px'
+              }}>
+                Occupancy Rate
+              </p>
+              <p style={{ 
+                fontSize: '11px', 
+                color: '#94a3b8', 
+                margin: '2px 0 0 0',
+                fontWeight: '500'
+              }}>
+                4,734 of 4,865 units
+              </p>
             </div>
           </div>
         </motion.div>
 
-        {/* 🤖🤖🤖 LEGENDARY AI EFFICIENCY - THE BRAIN 🤖🤖🤖 */}
+        {/* AI Efficiency Score - Premium Design */}
         <motion.div
-          whileHover={{ 
-            scale: 1.08, 
-            y: -12, 
-            boxShadow: '0 40px 80px rgba(67,233,123,0.4)',
-            rotate: [0, -1, 1, -1, 0],
-            transition: { duration: 0.3 }
-          }}
-          whileTap={{ scale: 0.95 }}
-          onClick={() => handleMetricClick('maintenance', '🤖 AI DOMINANCE', '96.8%')}
-          animate={{
-            boxShadow: [
-              '0 10px 40px rgba(67,233,123,0.2)',
-              '0 20px 60px rgba(56,249,215,0.3)',
-              '0 10px 40px rgba(67,233,123,0.2)'
-            ]
-          }}
-          transition={{
-            boxShadow: {
-              duration: 2.5,
-              repeat: Infinity,
-              ease: 'easeInOut'
-            }
-          }}
+          whileHover={{ scale: 1.03, y: -8, boxShadow: '0 25px 50px rgba(67,233,123,0.15)' }}
+          whileTap={{ scale: 0.98 }}
+          onClick={() => handleMetricClick('maintenance', 'AI Efficiency Score', '96.8%')}
           style={{
             cursor: 'pointer',
-            background: 'linear-gradient(135deg, #43e97b 0%, #38f9d7 40%, #00c9ff 100%)',
-            borderRadius: '28px',
-            padding: '16px',
+            background: 'linear-gradient(145deg, #ffffff 0%, #f0fdf4 100%)',
+            borderRadius: '24px',
+            padding: '20px',
+            boxShadow: '0 10px 40px rgba(0,0,0,0.06)',
             position: 'relative',
-            overflow: 'visible',
-            border: '3px solid rgba(255,255,255,0.5)',
-            transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
-            transform: 'translateZ(0)'
+            overflow: 'hidden',
+            border: '1px solid rgba(67,233,123,0.08)',
+            transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
           }}
         >
-          {/* Tech Icons */}
           <div style={{
             position: 'absolute',
-            top: '-8px',
-            right: '10px',
-            fontSize: '16px',
-            animation: 'sparkle 2s ease-in-out infinite'
-          }}>🤖</div>
-          <div style={{
-            position: 'absolute',
-            bottom: '-5px',
-            left: '-5px',
-            fontSize: '18px',
-            animation: 'bounce 2s ease-in-out infinite 0.5s'
-          }}>⚡</div>
-          
-          {/* Shine */}
-          <div style={{
-            position: 'absolute',
-            top: 0,
-            left: '-100%',
-            width: '200%',
-            height: '100%',
-            background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.3) 50%, transparent 100%)',
-            animation: 'shine 3s ease-in-out infinite'
+            top: -40,
+            right: -40,
+            width: '150px',
+            height: '150px',
+            background: 'radial-gradient(circle, rgba(67,233,123,0.15) 0%, transparent 70%)',
+            borderRadius: '50%',
+            animation: 'pulse 3s ease-in-out infinite'
           }} />
-          
-          <div style={{ position: 'relative', zIndex: 5 }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '10px' }}>
-              <motion.div
-                animate={{ scale: [1, 1.1, 1] }}
-                transition={{ duration: 2, repeat: Infinity }}
-                style={{
-                  width: '50px',
-                  height: '50px',
-                  background: 'linear-gradient(135deg, rgba(255,255,255,0.95), rgba(255,255,255,0.85))',
-                  borderRadius: '18px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  boxShadow: '0 10px 30px rgba(0,0,0,0.2)',
-                  border: '2px solid rgba(255,255,255,0.6)'
-                }}
-              >
-                <Cpu size={30} style={{ 
-                  color: '#43e97b', 
-                  strokeWidth: 3,
-                  filter: 'drop-shadow(0 3px 6px rgba(67,233,123,0.4))'
-                }} />
-              </motion.div>
-              
+          <div style={{ position: 'relative', zIndex: 1 }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '12px' }}>
               <div style={{
+                width: '42px',
+                height: '42px',
+                background: 'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)',
+                borderRadius: '14px',
                 display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'flex-end',
-                gap: '4px'
+                alignItems: 'center',
+                justifyContent: 'center',
+                boxShadow: '0 6px 20px rgba(67,233,123,0.25)'
               }}>
-                <div style={{
-                  padding: '3px 8px',
-                  background: 'linear-gradient(135deg, #FFD700, #FFA500)',
-                  borderRadius: '12px'
-                }}>
-                  <span style={{ fontSize: '10px', fontWeight: '900', color: '#7C2D12' }}>
-                    🧠 AI POWER
-                  </span>
-                </div>
-                <motion.div
-                  animate={{ scale: [1, 1.05, 1] }}
-                  transition={{ duration: 1.5, repeat: Infinity }}
-                  style={{
-                    padding: '5px 10px',
-                    background: 'linear-gradient(135deg, #ffffff, #f0fdf4)',
-                    borderRadius: '20px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '4px'
-                  }}
-                >
-                  <ArrowUpRight size={14} style={{ color: '#43e97b', strokeWidth: 3 }} />
-                  <span style={{ fontSize: '13px', fontWeight: '900', color: '#43e97b' }}>
-                    +12%
-                  </span>
-                </motion.div>
+                <Cpu size={22} style={{ color: 'white', strokeWidth: 2.5 }} />
+              </div>
+              <div style={{
+                padding: '6px 12px',
+                background: 'linear-gradient(135deg, #d4f4dd 0%, #bbf7d0 100%)',
+                borderRadius: '100px',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '5px',
+                boxShadow: '0 2px 8px rgba(34,197,94,0.15)'
+              }}>
+                <ArrowUpRight size={14} style={{ color: '#16a34a', strokeWidth: 3 }} />
+                <span style={{ fontSize: '12px', fontWeight: '700', color: '#16a34a' }}>
+                  12%
+                </span>
               </div>
             </div>
-            
-            <div style={{
-              background: 'linear-gradient(135deg, rgba(255,255,255,0.98), rgba(255,255,255,0.92))',
-              borderRadius: '20px',
-              padding: '10px',
-              backdropFilter: 'blur(20px)',
-              border: '1px solid rgba(255,255,255,0.8)'
-            }}>
-              <div style={{ textAlign: 'center', marginBottom: '8px' }}>
-                <motion.div
-                  animate={{ 
-                    textShadow: [
-                      '0 0 20px rgba(67,233,123,0.5)',
-                      '0 0 40px rgba(67,233,123,0.8)',
-                      '0 0 20px rgba(67,233,123,0.5)'
-                    ]
-                  }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                  style={{ 
-                    fontSize: '42px', 
-                    fontWeight: '900', 
-                    background: 'linear-gradient(135deg, #43e97b, #38f9d7)',
-                    WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent',
-                    margin: 0
-                  }}
-                >
-                  96.8%
-                </motion.div>
-                <p style={{ 
-                  fontSize: '11px', 
-                  color: '#374151', 
-                  margin: '4px 0 0 0', 
-                  fontWeight: '800',
-                  textTransform: 'uppercase'
-                }}>
-                  AI Efficiency 🤖
-                </p>
-              </div>
-              
-              <motion.div
-                animate={{
-                  background: [
-                    'linear-gradient(135deg, #e0f2f1, #b2dfdb)',
-                    'linear-gradient(135deg, #b2dfdb, #80cbc4)',
-                    'linear-gradient(135deg, #e0f2f1, #b2dfdb)'
-                  ]
-                }}
-                transition={{ duration: 3, repeat: Infinity }}
-                style={{
-                  padding: '8px',
-                  borderRadius: '12px',
-                  border: '2px solid #00897b'
-                }}
-              >
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <div>
-                    <p style={{ fontSize: '16px', fontWeight: '900', color: '#004d40', margin: 0 }}>
-                      $892K
-                    </p>
-                    <p style={{ fontSize: '8px', color: '#00695c', margin: 0, fontWeight: '700' }}>
-                      SAVED YTD
-                    </p>
-                  </div>
-                  <div style={{
-                    padding: '4px 8px',
-                    background: '#004d40',
-                    borderRadius: '8px'
-                  }}>
-                    <span style={{ fontSize: '10px', fontWeight: '800', color: '#e0f2f1' }}>
-                      94% AUTO
-                    </span>
-                  </div>
-                </div>
-              </motion.div>
+            <div>
+              <h3 style={{ 
+                fontSize: '32px', 
+                fontWeight: '900', 
+                color: '#0f172a', 
+                margin: '0 0 4px 0',
+                letterSpacing: '-0.5px'
+              }}>
+                96.8%
+              </h3>
+              <p style={{ 
+                fontSize: '13px', 
+                color: '#475569', 
+                margin: 0, 
+                fontWeight: '600',
+                letterSpacing: '0.3px'
+              }}>
+                AI Efficiency
+              </p>
+              <p style={{ 
+                fontSize: '11px', 
+                color: '#94a3b8', 
+                margin: '2px 0 0 0',
+                fontWeight: '500'
+              }}>
+                $892K saved YTD
+              </p>
             </div>
           </div>
         </motion.div>
 
-        {/* 🌟🌟🌟 LEGENDARY TENANT SATISFACTION - THE LOVE 🌟🌟🌟 */}
+        {/* Tenant Satisfaction - Premium Design */}
         <motion.div
-          whileHover={{ 
-            scale: 1.08, 
-            y: -12, 
-            boxShadow: '0 40px 80px rgba(255,215,0,0.4)',
-            rotate: [0, 1, -1, 1, 0],
-            transition: { duration: 0.3 }
-          }}
-          whileTap={{ scale: 0.95 }}
-          onClick={() => handleMetricClick('tenantHappiness', '🌟 TENANT PARADISE', '4.9★')}
-          animate={{
-            boxShadow: [
-              '0 10px 40px rgba(255,215,0,0.2)',
-              '0 20px 60px rgba(255,237,78,0.3)',
-              '0 10px 40px rgba(255,215,0,0.2)'
-            ]
-          }}
-          transition={{
-            boxShadow: {
-              duration: 2.5,
-              repeat: Infinity,
-              ease: 'easeInOut'
-            }
-          }}
+          whileHover={{ scale: 1.03, y: -8, boxShadow: '0 25px 50px rgba(255,215,0,0.15)' }}
+          whileTap={{ scale: 0.98 }}
+          onClick={() => handleMetricClick('tenantHappiness', 'Tenant Satisfaction', '4.9★')}
           style={{
             cursor: 'pointer',
-            background: 'linear-gradient(135deg, #ffd700 0%, #ffed4e 40%, #ffca28 100%)',
-            borderRadius: '28px',
-            padding: '16px',
+            background: 'linear-gradient(145deg, #ffffff 0%, #fffef5 100%)',
+            borderRadius: '24px',
+            padding: '20px',
+            boxShadow: '0 10px 40px rgba(0,0,0,0.06)',
             position: 'relative',
-            overflow: 'visible',
-            border: '3px solid rgba(255,255,255,0.5)',
-            transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
-            transform: 'translateZ(0)'
+            overflow: 'hidden',
+            border: '1px solid rgba(255,215,0,0.08)',
+            transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
           }}
         >
-          {/* Happy Icons */}
           <div style={{
             position: 'absolute',
-            top: '-8px',
-            left: '10px',
-            fontSize: '16px',
-            animation: 'bounce 2s ease-in-out infinite'
-          }}>😊</div>
-          <div style={{
-            position: 'absolute',
-            bottom: '-5px',
-            right: '-5px',
-            fontSize: '18px',
-            animation: 'float 3s ease-in-out infinite 0.5s'
-          }}>❤️</div>
-          
-          {/* Shine */}
-          <div style={{
-            position: 'absolute',
-            top: 0,
-            left: '-100%',
-            width: '200%',
-            height: '100%',
-            background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.4) 50%, transparent 100%)',
-            animation: 'shine 3s ease-in-out infinite'
+            top: -40,
+            right: -40,
+            width: '150px',
+            height: '150px',
+            background: 'radial-gradient(circle, rgba(255,215,0,0.15) 0%, transparent 70%)',
+            borderRadius: '50%',
+            animation: 'pulse 3s ease-in-out infinite'
           }} />
-          
-          <div style={{ position: 'relative', zIndex: 5 }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '10px' }}>
-              <motion.div
-                animate={{ scale: [1, 1.1, 1] }}
-                transition={{ duration: 2, repeat: Infinity }}
-                style={{
-                  width: '50px',
-                  height: '50px',
-                  background: 'linear-gradient(135deg, rgba(255,255,255,0.95), rgba(255,255,255,0.85))',
-                  borderRadius: '18px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  boxShadow: '0 10px 30px rgba(0,0,0,0.2)',
-                  border: '2px solid rgba(255,255,255,0.6)'
-                }}
-              >
-                <Star size={30} style={{ 
-                  color: '#ffd700', 
-                  strokeWidth: 3,
-                  filter: 'drop-shadow(0 3px 6px rgba(255,215,0,0.4))'
-                }} />
-              </motion.div>
-              
+          <div style={{ position: 'relative', zIndex: 1 }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '12px' }}>
               <div style={{
+                width: '42px',
+                height: '42px',
+                background: 'linear-gradient(135deg, #ffd700 0%, #ffed4e 100%)',
+                borderRadius: '14px',
                 display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'flex-end',
-                gap: '4px'
+                alignItems: 'center',
+                justifyContent: 'center',
+                boxShadow: '0 6px 20px rgba(255,215,0,0.25)'
               }}>
-                <div style={{
-                  padding: '3px 8px',
-                  background: 'linear-gradient(135deg, #FF1493, #FF69B4)',
-                  borderRadius: '12px'
-                }}>
-                  <span style={{ fontSize: '10px', fontWeight: '900', color: 'white' }}>
-                    ❤️ LOVED
-                  </span>
-                </div>
-                <motion.div
-                  animate={{ scale: [1, 1.05, 1] }}
-                  transition={{ duration: 1.5, repeat: Infinity }}
-                  style={{
-                    padding: '5px 10px',
-                    background: 'linear-gradient(135deg, #ffffff, #fffef5)',
-                    borderRadius: '20px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '4px'
-                  }}
-                >
-                  <ArrowUpRight size={14} style={{ color: '#ffd700', strokeWidth: 3 }} />
-                  <span style={{ fontSize: '13px', fontWeight: '900', color: '#ffd700' }}>
-                    +0.3
-                  </span>
-                </motion.div>
+                <Star size={22} style={{ color: 'white', strokeWidth: 2.5 }} />
+              </div>
+              <div style={{
+                padding: '6px 12px',
+                background: 'linear-gradient(135deg, #d4f4dd 0%, #bbf7d0 100%)',
+                borderRadius: '100px',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '5px',
+                boxShadow: '0 2px 8px rgba(34,197,94,0.15)'
+              }}>
+                <ArrowUpRight size={14} style={{ color: '#16a34a', strokeWidth: 3 }} />
+                <span style={{ fontSize: '12px', fontWeight: '700', color: '#16a34a' }}>
+                  0.3
+                </span>
               </div>
             </div>
-            
-            <div style={{
-              background: 'linear-gradient(135deg, rgba(255,255,255,0.98), rgba(255,255,255,0.92))',
-              borderRadius: '20px',
-              padding: '10px',
-              backdropFilter: 'blur(20px)',
-              border: '1px solid rgba(255,255,255,0.8)'
-            }}>
-              <div style={{ textAlign: 'center', marginBottom: '8px' }}>
-                <motion.div
-                  animate={{ 
-                    textShadow: [
-                      '0 0 20px rgba(255,215,0,0.5)',
-                      '0 0 40px rgba(255,215,0,0.8)',
-                      '0 0 20px rgba(255,215,0,0.5)'
-                    ]
-                  }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                  style={{ 
-                    fontSize: '42px', 
-                    fontWeight: '900', 
-                    background: 'linear-gradient(135deg, #ffd700, #ffed4e)',
-                    WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent',
-                    margin: 0
-                  }}
-                >
-                  4.9★
-                </motion.div>
-                <p style={{ 
-                  fontSize: '11px', 
-                  color: '#374151', 
-                  margin: '4px 0 0 0', 
-                  fontWeight: '800',
-                  textTransform: 'uppercase'
-                }}>
-                  Tenant Rating 🌟
-                </p>
-              </div>
-              
-              <motion.div
-                animate={{
-                  background: [
-                    'linear-gradient(135deg, #fff9c4, #fff59d)',
-                    'linear-gradient(135deg, #fff59d, #fff176)',
-                    'linear-gradient(135deg, #fff9c4, #fff59d)'
-                  ]
-                }}
-                transition={{ duration: 3, repeat: Infinity }}
-                style={{
-                  padding: '8px',
-                  borderRadius: '12px',
-                  border: '2px solid #f9a825'
-                }}
-              >
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <div>
-                    <p style={{ fontSize: '16px', fontWeight: '900', color: '#f57f17', margin: 0 }}>
-                      98.7%
-                    </p>
-                    <p style={{ fontSize: '8px', color: '#f9a825', margin: 0, fontWeight: '700' }}>
-                      SATISFACTION
-                    </p>
-                  </div>
-                  <div style={{
-                    padding: '4px 8px',
-                    background: '#f57f17',
-                    borderRadius: '8px'
-                  }}>
-                    <span style={{ fontSize: '10px', fontWeight: '800', color: '#fff9c4' }}>
-                      NPS: 78
-                    </span>
-                  </div>
-                </div>
-              </motion.div>
+            <div>
+              <h3 style={{ 
+                fontSize: '32px', 
+                fontWeight: '900', 
+                color: '#0f172a', 
+                margin: '0 0 4px 0',
+                letterSpacing: '-0.5px'
+              }}>
+                4.9★
+              </h3>
+              <p style={{ 
+                fontSize: '13px', 
+                color: '#475569', 
+                margin: 0, 
+                fontWeight: '600',
+                letterSpacing: '0.3px'
+              }}>
+                Tenant Rating
+              </p>
+              <p style={{ 
+                fontSize: '11px', 
+                color: '#94a3b8', 
+                margin: '2px 0 0 0',
+                fontWeight: '500'
+              }}>
+                98.7% satisfaction
+              </p>
             </div>
           </div>
         </motion.div>
